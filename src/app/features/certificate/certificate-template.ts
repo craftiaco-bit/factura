@@ -52,14 +52,14 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
 
       <!-- FOOTER -->
       <div class="footer">
-        <div class="footer-top">
+        <div class="footer-content">
           <img src="/images/image-removebg-preview.png" alt="GSM Grupo Supermotos" class="footer-gsm-logo" />
-          <div class="footer-line"></div>
-        </div>
-        <div class="footer-bar">
-          <p class="footer-text">
-            *Importante: este certificado solo hace referencia a los productos mencionados anteriormente.
-          </p>
+          <div class="footer-right">
+            <div class="footer-line"></div>
+            <p class="footer-text">
+              *Importante: este certificado solo hace referencia a los productos mencionados anteriormente.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
     /* ===== HEADER ===== */
     .header { flex-shrink: 0; z-index: 1; padding: 16px 24px 0; }
     .header-banner-img {
-      width: 320px;
+      width: 420px;
       height: auto;
       display: block;
     }
@@ -196,34 +196,33 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
     /* ===== FOOTER ===== */
     .footer {
       flex-shrink: 0;
+      padding: 16px 40px 24px;
       z-index: 1;
       position: relative;
       margin-top: auto;
     }
-    .footer-top {
+    .footer-content {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 0 40px 12px;
+      gap: 20px;
     }
     .footer-gsm-logo {
-      width: 80px;
+      width: 120px;
       height: auto;
       flex-shrink: 0;
     }
-    .footer-line {
+    .footer-right {
       flex: 1;
+    }
+    .footer-line {
       height: 2px;
       background: #D5150D;
-    }
-    .footer-bar {
-      background: #D5150D;
-      padding: 10px 40px;
+      margin-bottom: 10px;
     }
     .footer-text {
       font-size: 11px;
       font-style: italic;
-      color: #fff;
+      color: #D5150D;
       text-align: center;
       line-height: 1.5;
     }
