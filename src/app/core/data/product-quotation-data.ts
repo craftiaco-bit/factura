@@ -42,7 +42,7 @@ const ICONS = {
 
 export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
   'honda-africa-twin': {
-    accentColor: '#C41E1E',
+    accentColor: '#D5150D',
     accentDark: '#8B0000',
     category: 'Adventure Touring',
     colors: ['Tricolor Rojo/Blanco/Azul', 'Negro Mate', 'Gris Plata'],
@@ -73,8 +73,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-cb-100': {
-    accentColor: '#1A73E8',
-    accentDark: '#0D47A1',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Urbana / Económica',
     colors: ['Negro', 'Rojo', 'Azul'],
     features: [
@@ -105,7 +105,7 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
   },
   'honda-cb-190r': {
     accentColor: '#D5150D',
-    accentDark: '#9B0000',
+    accentDark: '#8B0000',
     category: 'Deportiva Urbana',
     colors: ['Rojo Racing', 'Negro Mate', 'Azul Metálico'],
     features: [
@@ -166,8 +166,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-cb-350d': {
-    accentColor: '#8B4513',
-    accentDark: '#5C3010',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Classic / Heritage',
     colors: ['Negro Cromado', 'Marrón Vintage', 'Gris Plata'],
     features: [
@@ -324,8 +324,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-navi-adventure': {
-    accentColor: '#4A6741',
-    accentDark: '#2E4229',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Fun Adventure',
     colors: ['Verde Camuflaje', 'Naranja Arena', 'Negro Mate'],
     features: [
@@ -355,8 +355,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-navi-mix': {
-    accentColor: '#E91E63',
-    accentDark: '#AD1457',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Fun Custom',
     colors: ['Blanco con accesorios', 'Negro con accesorios', 'Rojo con accesorios'],
     features: [
@@ -386,8 +386,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-navi-mix-2': {
-    accentColor: '#7B1FA2',
-    accentDark: '#4A148C',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Fun Custom Special',
     colors: ['Edición especial con accesorios'],
     features: [
@@ -449,8 +449,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-pcx-160-abs': {
-    accentColor: '#1A237E',
-    accentDark: '#0D1642',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Scooter Premium',
     colors: ['Blanco Perla', 'Negro Oscuro', 'Gris Mate', 'Azul Mate'],
     features: [
@@ -481,8 +481,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-wave-110': {
-    accentColor: '#2E7D32',
-    accentDark: '#1B5E20',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Urbana / Trabajo',
     colors: ['Negro', 'Rojo', 'Azul', 'Gris'],
     features: [
@@ -512,8 +512,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-x-adv-750': {
-    accentColor: '#37474F',
-    accentDark: '#1B2631',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Adventure Scooter Premium',
     colors: ['Negro Oscuro Mate', 'Gris Titanio', 'Rojo Metalizado'],
     features: [
@@ -639,8 +639,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-xre-300-sahara': {
-    accentColor: '#BF7A2A',
-    accentDark: '#8B5A1A',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Adventure Touring',
     colors: ['Arena Dorado', 'Negro Aventura', 'Rojo Rally'],
     features: [
@@ -671,8 +671,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-cb125f-20': {
-    accentColor: '#1565C0',
-    accentDark: '#0D47A1',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Sport Urbana',
     colors: ['Rojo Deportivo', 'Azul Metálico', 'Negro'],
     features: [
