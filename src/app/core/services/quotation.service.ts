@@ -1,10 +1,14 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Quotation } from '../models/quotation.model';
+
+const STORAGE_KEY = 'quotations';
 
 @Injectable({ providedIn: 'root' })
 export class QuotationService {
   private readonly http = inject(HttpClient);
+  private readonly platformId = inject(PLATFORM_ID);
 
   readonly quotations = signal<Quotation[]>([]);
 
@@ -13,9 +17,17 @@ export class QuotationService {
   }
 
   private loadAll(): void {
+    const local = this.readLocal();
+    if (local.length) this.quotations.set(local);
+
     this.http.get<Quotation[]>('/api/quotations').subscribe({
-      next: (data) => this.quotations.set(data),
-      error: () => this.quotations.set([]),
+      next: (data) => {
+        this.quotations.set(data);
+        this.writeLocal(data);
+      },
+      error: () => {
+        if (!local.length) this.quotations.set([]);
+      },
     });
   }
 
@@ -35,12 +47,14 @@ export class QuotationService {
       this.quotations.set([...existing, quotation]);
     }
 
+    this.writeLocal(this.quotations());
     this.http.post('/api/quotations', quotation).subscribe();
     return quotation;
   }
 
   delete(id: string): void {
     this.quotations.set(this.quotations().filter((q) => q.id !== id));
+    this.writeLocal(this.quotations());
     this.http.delete(`/api/quotations?id=${id}`).subscribe();
   }
 
@@ -62,5 +76,18 @@ export class QuotationService {
       (q.registrationValue ?? 0) +
       (q.insuranceValue ?? 0)
     ) * (q.quantity ?? 1);
+  }
+
+  private readLocal(): Quotation[] {
+    if (!isPlatformBrowser(this.platformId)) return [];
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch { return []; }
+  }
+
+  private writeLocal(data: Quotation[]): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
   }
 }

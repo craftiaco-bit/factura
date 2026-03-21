@@ -1,10 +1,14 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Invoice, InvoiceItem } from '../models/invoice.model';
+
+const STORAGE_KEY = 'invoices';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
   private readonly http = inject(HttpClient);
+  private readonly platformId = inject(PLATFORM_ID);
 
   readonly invoices = signal<Invoice[]>([]);
 
@@ -13,9 +17,19 @@ export class InvoiceService {
   }
 
   private loadAll(): void {
+    // Load from localStorage first for instant data
+    const local = this.readLocal();
+    if (local.length) this.invoices.set(local);
+
     this.http.get<Invoice[]>('/api/invoices').subscribe({
-      next: (data) => this.invoices.set(data),
-      error: () => this.invoices.set([]),
+      next: (data) => {
+        this.invoices.set(data);
+        this.writeLocal(data);
+      },
+      error: () => {
+        // Keep localStorage data if API fails
+        if (!local.length) this.invoices.set([]);
+      },
     });
   }
 
@@ -47,12 +61,14 @@ export class InvoiceService {
       this.invoices.set([...existing, invoice]);
     }
 
+    this.writeLocal(this.invoices());
     this.http.post('/api/invoices', invoice).subscribe();
     return invoice;
   }
 
   delete(id: string): void {
     this.invoices.set(this.invoices().filter((i) => i.id !== id));
+    this.writeLocal(this.invoices());
     this.http.delete(`/api/invoices?id=${id}`).subscribe();
   }
 
@@ -79,5 +95,18 @@ export class InvoiceService {
 
   calculateTotal(subtotal: number, tax: number): number {
     return subtotal + tax;
+  }
+
+  private readLocal(): Invoice[] {
+    if (!isPlatformBrowser(this.platformId)) return [];
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch { return []; }
+  }
+
+  private writeLocal(data: Invoice[]): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
   }
 }
