@@ -69,17 +69,28 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
           @if (selectedProduct()) {
             <!-- Product Preview -->
             <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-              <img
-                [src]="selectedProduct()!.images[0]"
-                [alt]="selectedProduct()!.name"
-                class="w-32 h-24 object-contain"
-              />
+              @if (form.productImageUrl) {
+                <img
+                  [src]="form.productImageUrl"
+                  [alt]="selectedProduct()!.name"
+                  class="w-32 h-24 object-contain"
+                />
+              }
               <div>
                 <h3 class="font-[Oxanium] font-bold text-lg">{{ selectedProduct()!.name }}</h3>
               </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">URL Imagen de la Moto</label>
+                <input
+                  type="url"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                  placeholder="Pega aqui la URL de la imagen de la moto"
+                  [(ngModel)]="form.productImageUrl"
+                />
+              </div>
               <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Color / Variante</label>
                 <input
@@ -289,6 +300,7 @@ export class InvoiceForm {
   ];
 
   form = {
+    productImageUrl: '',
     productColor: '',
     productYear: new Date().getFullYear(),
     clientName: '',
@@ -365,7 +377,7 @@ export class InvoiceForm {
       clientAddress: this.form.clientAddress,
       productSlug: product.slug,
       productName: product.name,
-      productImage: product.images[0] ?? '',
+      productImage: this.form.productImageUrl || product.images[0] || '',
       productColor: this.form.productColor,
       productYear: this.form.productYear,
       items: this.items.map((i) => ({ ...i })),

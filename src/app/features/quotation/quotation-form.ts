@@ -10,6 +10,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
 import { getProductQuotationProfile } from '../../core/data/product-quotation-data';
 
 interface QuotationFormData {
+  productImageUrl: string;
   productColor: string;
   productYear: number;
   clientName: string;
@@ -89,11 +90,13 @@ interface QuotationFormData {
           @if (selectedProduct()) {
             <!-- Product Preview -->
             <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-              <img
-                [src]="selectedProduct()!.images[0]"
-                [alt]="selectedProduct()!.name"
-                class="w-32 h-24 object-contain"
-              />
+              @if (form.productImageUrl) {
+                <img
+                  [src]="form.productImageUrl"
+                  [alt]="selectedProduct()!.name"
+                  class="w-32 h-24 object-contain"
+                />
+              }
               <div>
                 <h3 class="font-[Oxanium] font-bold text-lg">{{ selectedProduct()!.name }}</h3>
                 <p class="text-sm text-gray-500">{{ specCount() }} especificaciones</p>
@@ -101,6 +104,17 @@ interface QuotationFormData {
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Image URL -->
+              <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">URL Imagen de la Moto</label>
+                <input
+                  type="url"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                  placeholder="Pega aqui la URL de la imagen de la moto"
+                  [ngModel]="form.productImageUrl"
+                  (ngModelChange)="form.productImageUrl = $event"
+                />
+              </div>
               <!-- Color -->
               <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Color / Variante</label>
@@ -325,6 +339,7 @@ export class QuotationForm {
     validUntil.setDate(validUntil.getDate() + 15);
 
     return {
+      productImageUrl: '',
       productColor: '',
       productYear: today.getFullYear(),
       clientName: '',
@@ -368,7 +383,7 @@ export class QuotationForm {
       clientName: this.form.clientName,
       productSlug: product.slug,
       productName: product.name,
-      productImage: product.images[0] ?? '',
+      productImage: this.form.productImageUrl || product.images[0] || '',
       productColor: this.form.productColor,
       productYear: this.form.productYear,
       specifications: profile.specifications,

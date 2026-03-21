@@ -84,9 +84,11 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
 
       <!-- PRODUCT SECTION -->
       <div class="product-section">
-        <div class="product-image-area">
-          <img [src]="data().productImage" [alt]="data().productName" class="product-img" />
-        </div>
+        @if (data().productImage) {
+          <div class="product-image-area">
+            <img [src]="data().productImage" [alt]="data().productName" class="product-img" />
+          </div>
+        }
         <div class="product-details">
           <h3 class="product-name">{{ data().productName }}</h3>
           <p class="product-variant">{{ data().productYear }} &bull; {{ data().productColor }}</p>
