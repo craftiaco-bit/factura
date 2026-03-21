@@ -1,13 +1,23 @@
-import { Injectable, signal, computed, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Invoice, InvoiceItem } from '../models/invoice.model';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly STORAGE_KEY = 'honda_invoices';
+  private readonly http = inject(HttpClient);
 
-  readonly invoices = signal<Invoice[]>(this.loadFromStorage());
+  readonly invoices = signal<Invoice[]>([]);
+
+  constructor() {
+    this.loadAll();
+  }
+
+  private loadAll(): void {
+    this.http.get<Invoice[]>('/api/invoices').subscribe({
+      next: (data) => this.invoices.set(data),
+      error: () => this.invoices.set([]),
+    });
+  }
 
   getById(id: string) {
     return computed(() => this.invoices().find((i) => i.id === id) ?? null);
@@ -37,13 +47,13 @@ export class InvoiceService {
       this.invoices.set([...existing, invoice]);
     }
 
-    this.persistToStorage();
+    this.http.post('/api/invoices', invoice).subscribe();
     return invoice;
   }
 
   delete(id: string): void {
     this.invoices.set(this.invoices().filter((i) => i.id !== id));
-    this.persistToStorage();
+    this.http.delete(`/api/invoices/${id}`).subscribe();
   }
 
   generateId(): string {
@@ -69,20 +79,5 @@ export class InvoiceService {
 
   calculateTotal(subtotal: number, tax: number): number {
     return subtotal + tax;
-  }
-
-  private loadFromStorage(): Invoice[] {
-    if (!isPlatformBrowser(this.platformId)) return [];
-    try {
-      const data = localStorage.getItem(this.STORAGE_KEY);
-      return data ? JSON.parse(data) : [];
-    } catch {
-      return [];
-    }
-  }
-
-  private persistToStorage(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.invoices()));
   }
 }

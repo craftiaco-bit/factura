@@ -1,13 +1,23 @@
-import { Injectable, signal, computed, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Quotation } from '../models/quotation.model';
 
 @Injectable({ providedIn: 'root' })
 export class QuotationService {
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly STORAGE_KEY = 'honda_quotations';
+  private readonly http = inject(HttpClient);
 
-  readonly quotations = signal<Quotation[]>(this.loadFromStorage());
+  readonly quotations = signal<Quotation[]>([]);
+
+  constructor() {
+    this.loadAll();
+  }
+
+  private loadAll(): void {
+    this.http.get<Quotation[]>('/api/quotations').subscribe({
+      next: (data) => this.quotations.set(data),
+      error: () => this.quotations.set([]),
+    });
+  }
 
   getById(id: string) {
     return computed(() => this.quotations().find((q) => q.id === id) ?? null);
@@ -25,13 +35,13 @@ export class QuotationService {
       this.quotations.set([...existing, quotation]);
     }
 
-    this.persistToStorage();
+    this.http.post('/api/quotations', quotation).subscribe();
     return quotation;
   }
 
   delete(id: string): void {
     this.quotations.set(this.quotations().filter((q) => q.id !== id));
-    this.persistToStorage();
+    this.http.delete(`/api/quotations/${id}`).subscribe();
   }
 
   generateId(): string {
@@ -52,20 +62,5 @@ export class QuotationService {
       (q.registrationValue ?? 0) +
       (q.insuranceValue ?? 0)
     ) * (q.quantity ?? 1);
-  }
-
-  private loadFromStorage(): Quotation[] {
-    if (!isPlatformBrowser(this.platformId)) return [];
-    try {
-      const data = localStorage.getItem(this.STORAGE_KEY);
-      return data ? JSON.parse(data) : [];
-    } catch {
-      return [];
-    }
-  }
-
-  private persistToStorage(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.quotations()));
   }
 }

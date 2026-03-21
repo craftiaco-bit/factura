@@ -1,13 +1,23 @@
-import { Injectable, signal, computed, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Certificate } from '../models/certificate.model';
 
 @Injectable({ providedIn: 'root' })
 export class CertificateService {
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly STORAGE_KEY = 'honda_certificates';
+  private readonly http = inject(HttpClient);
 
-  readonly certificates = signal<Certificate[]>(this.loadFromStorage());
+  readonly certificates = signal<Certificate[]>([]);
+
+  constructor() {
+    this.loadAll();
+  }
+
+  private loadAll(): void {
+    this.http.get<Certificate[]>('/api/certificates').subscribe({
+      next: (data) => this.certificates.set(data),
+      error: () => this.certificates.set([]),
+    });
+  }
 
   getById(id: string) {
     return computed(() => this.certificates().find((c) => c.id === id) ?? null);
@@ -25,31 +35,16 @@ export class CertificateService {
       this.certificates.set([...existing, certificate]);
     }
 
-    this.persistToStorage();
+    this.http.post('/api/certificates', certificate).subscribe();
     return certificate;
   }
 
   delete(id: string): void {
     this.certificates.set(this.certificates().filter((c) => c.id !== id));
-    this.persistToStorage();
+    this.http.delete(`/api/certificates/${id}`).subscribe();
   }
 
   generateId(): string {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
-  }
-
-  private loadFromStorage(): Certificate[] {
-    if (!isPlatformBrowser(this.platformId)) return [];
-    try {
-      const data = localStorage.getItem(this.STORAGE_KEY);
-      return data ? JSON.parse(data) : [];
-    } catch {
-      return [];
-    }
-  }
-
-  private persistToStorage(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.certificates()));
   }
 }
