@@ -702,8 +702,8 @@ export class QuotationTemplate {
   readonly data = input.required<Quotation>();
   readonly qrSvg = signal<SafeHtml | null>(null);
 
-  readonly accent = computed(() => this.data().accentColor || '#D5150D');
-  readonly accentDark = computed(() => this.data().accentDark || '#8B0000');
+  readonly accent = computed(() => '#D5150D');
+  readonly accentDark = computed(() => '#8B0000');
 
   readonly dataBenefits = computed(() => this.data().benefits ?? []);
   readonly dataFeatures = computed(() => this.data().features ?? []);
