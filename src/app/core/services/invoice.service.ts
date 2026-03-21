@@ -53,7 +53,7 @@ export class InvoiceService {
 
   delete(id: string): void {
     this.invoices.set(this.invoices().filter((i) => i.id !== id));
-    this.http.delete(`/api/invoices/${id}`).subscribe();
+    this.http.delete(`/api/invoices?id=${id}`).subscribe();
   }
 
   generateId(): string {

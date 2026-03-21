@@ -1,11 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { sql } from '../db';
+import { sql } from './db';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     const rows = await sql('SELECT * FROM quotations ORDER BY created_at DESC');
     const quotations = rows.map(toQuotation);
     return res.status(200).json(quotations);
+  }
+
+  if (req.method === 'DELETE') {
+    const { id } = req.query;
+    await sql('DELETE FROM quotations WHERE id = $1', [id]);
+    return res.status(200).json({ deleted: true });
   }
 
   if (req.method === 'POST') {

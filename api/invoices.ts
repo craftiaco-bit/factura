@@ -1,11 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { sql } from '../db';
+import { sql } from './db';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     const rows = await sql('SELECT * FROM invoices ORDER BY created_at DESC');
     const invoices = rows.map(toInvoice);
     return res.status(200).json(invoices);
+  }
+
+  if (req.method === 'DELETE') {
+    const { id } = req.query;
+    await sql('DELETE FROM invoices WHERE id = $1', [id]);
+    return res.status(200).json({ deleted: true });
   }
 
   if (req.method === 'POST') {

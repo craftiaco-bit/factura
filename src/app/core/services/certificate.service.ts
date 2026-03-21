@@ -41,7 +41,7 @@ export class CertificateService {
 
   delete(id: string): void {
     this.certificates.set(this.certificates().filter((c) => c.id !== id));
-    this.http.delete(`/api/certificates/${id}`).subscribe();
+    this.http.delete(`/api/certificates?id=${id}`).subscribe();
   }
 
   generateId(): string {

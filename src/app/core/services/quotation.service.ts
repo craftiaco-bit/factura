@@ -41,7 +41,7 @@ export class QuotationService {
 
   delete(id: string): void {
     this.quotations.set(this.quotations().filter((q) => q.id !== id));
-    this.http.delete(`/api/quotations/${id}`).subscribe();
+    this.http.delete(`/api/quotations?id=${id}`).subscribe();
   }
 
   generateId(): string {
