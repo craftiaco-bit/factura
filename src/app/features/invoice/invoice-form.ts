@@ -41,9 +41,9 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
               </button>
               <button
                 class="flex-1 py-3 px-4 rounded-lg font-[Oxanium] font-bold text-lg uppercase tracking-wide border-2 transition-all cursor-pointer"
-                [style.background]="invoiceType() === 'credito' ? '#006D77' : '#fff'"
+                [style.background]="invoiceType() === 'credito' ? '#D5150D' : '#fff'"
                 [style.color]="invoiceType() === 'credito' ? '#fff' : '#555'"
-                [style.border-color]="invoiceType() === 'credito' ? '#006D77' : '#d1d5db'"
+                [style.border-color]="invoiceType() === 'credito' ? '#D5150D' : '#d1d5db'"
                 (click)="invoiceType.set('credito')"
               >
                 Credito
@@ -202,29 +202,29 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
 
             <!-- Credit Fields -->
             @if (invoiceType() === 'credito') {
-              <h3 class="font-[Oxanium] font-bold text-lg border-b-2 border-[#006D77] pb-2 text-[#006D77]">
+              <h3 class="font-[Oxanium] font-bold text-lg border-b-2 border-[#D5150D] pb-2 text-[#D5150D]">
                 Informacion de Financiacion
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-1">Cuota Inicial</label>
-                  <input type="number" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#006D77]"
+                  <input type="number" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
                     [(ngModel)]="form.initialPayment" (ngModelChange)="recalculateCredit()" />
                 </div>
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-1">No. de Cuotas</label>
-                  <input type="number" min="1" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#006D77]"
+                  <input type="number" min="1" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
                     [(ngModel)]="form.installments" (ngModelChange)="recalculateCredit()" />
                 </div>
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-1">Entidad Financiera</label>
-                  <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#006D77]"
+                  <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
                     placeholder="Banco, cooperativa, etc." [(ngModel)]="form.financingEntity" />
                 </div>
                 <div class="flex items-end">
-                  <div class="w-full bg-[#f0fafb] border-2 border-[#006D77] rounded-lg px-4 py-2">
+                  <div class="w-full bg-[#fef2f2] border-2 border-[#D5150D] rounded-lg px-4 py-2">
                     <span class="text-sm text-gray-500">Cuota mensual:</span>
-                    <span class="block font-[Oxanium] font-bold text-xl text-[#006D77]">
+                    <span class="block font-[Oxanium] font-bold text-xl text-[#D5150D]">
                       {{ form.monthlyPayment | currencyCop }}
                     </span>
                   </div>
@@ -258,7 +258,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
             <div class="flex justify-end gap-4 pt-4">
               <button
                 class="px-8 py-3 text-white font-[Oxanium] font-bold text-lg rounded-lg uppercase tracking-wide transition-colors cursor-pointer"
-                [style.background]="invoiceType() === 'credito' ? '#006D77' : '#D5150D'"
+                [style.background]="invoiceType() === 'credito' ? '#D5150D' : '#D5150D'"
                 (click)="createInvoice()"
               >
                 Generar Factura de {{ invoiceType() === 'contado' ? 'Contado' : 'Credito' }}

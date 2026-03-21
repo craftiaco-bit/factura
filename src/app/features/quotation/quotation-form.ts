@@ -61,9 +61,9 @@ interface QuotationFormData {
               </button>
               <button
                 class="flex-1 py-3 px-4 rounded-lg font-[Oxanium] font-bold text-lg uppercase tracking-wide border-2 transition-all cursor-pointer"
-                [style.background]="paymentType() === 'credito' ? '#006D77' : '#fff'"
+                [style.background]="paymentType() === 'credito' ? '#D5150D' : '#fff'"
                 [style.color]="paymentType() === 'credito' ? '#fff' : '#555'"
-                [style.border-color]="paymentType() === 'credito' ? '#006D77' : '#d1d5db'"
+                [style.border-color]="paymentType() === 'credito' ? '#D5150D' : '#d1d5db'"
                 (click)="paymentType.set('credito')"
               >
                 Crédito / Financiación
