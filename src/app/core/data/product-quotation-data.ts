@@ -293,8 +293,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-navi': {
-    accentColor: '#FF6B00',
-    accentDark: '#CC5500',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Fun Bike',
     colors: ['Rojo Candy', 'Azul Patriot', 'Naranja Nútmeg', 'Verde Menta'],
     features: [
@@ -544,8 +544,8 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     },
   },
   'honda-xblade-160': {
-    accentColor: '#F57C00',
-    accentDark: '#E65100',
+    accentColor: '#D5150D',
+    accentDark: '#8B0000',
     category: 'Street Sport',
     colors: ['Naranja Mate', 'Negro Mate', 'Rojo Deportivo'],
     features: [
