@@ -6,14 +6,14 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
   selector: 'app-invoice-template',
   imports: [CurrencyCopPipe],
   template: `
-    <div class="invoice-page" [class.invoice-credit]="data().type === 'credito'" id="invoice-render">
+    <div class="invoice-page" id="invoice-render">
       <!-- WATERMARK -->
       <div class="watermark">
         <img src="/Honda_Logo.svg.png" alt="" />
       </div>
 
       <!-- TYPE BANNER -->
-      <div class="type-banner" [class.type-banner-credit]="data().type === 'credito'">
+      <div class="type-banner">
         <span class="type-banner-text">
           {{ data().type === 'contado' ? 'FACTURA DE VENTA — CONTADO' : 'FACTURA DE VENTA — CREDITO' }}
         </span>
@@ -32,7 +32,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
           </div>
         </div>
         <div class="header-right">
-          <div class="invoice-type-badge" [class.credit]="data().type === 'credito'">
+          <div class="invoice-type-badge">
             {{ data().type === 'contado' ? 'CONTADO' : 'CREDITO' }}
           </div>
           <div class="invoice-meta">
@@ -53,7 +53,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       </div>
 
       <!-- DIVIDER -->
-      <div class="divider" [class.divider-credit]="data().type === 'credito'"></div>
+      <div class="divider"></div>
 
       <!-- CLIENT INFO -->
       <div class="client-section">
@@ -130,7 +130,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
             <span>IVA (19%):</span>
             <span>{{ data().tax | currencyCop }}</span>
           </div>
-          <div class="total-row grand-total" [class.grand-total-credit]="data().type === 'credito'">
+          <div class="total-row grand-total">
             <span>TOTAL:</span>
             <span>{{ data().total | currencyCop }}</span>
           </div>
@@ -168,7 +168,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
 
       <!-- PAYMENT TYPE STAMP -->
       <div class="stamp-area">
-        <div class="stamp" [class.stamp-credit]="data().type === 'credito'">
+        <div class="stamp">
           {{ data().type === 'contado' ? 'CONTADO' : 'CREDITO' }}
         </div>
       </div>
@@ -188,7 +188,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       </div>
 
       <!-- BOTTOM STRIPE -->
-      <div class="bottom-stripe" [class.bottom-stripe-credit]="data().type === 'credito'">
+      <div class="bottom-stripe">
         <div class="stripe-inner">
           <span class="stripe-bar"></span>
           <span class="stripe-bar"></span>
@@ -256,9 +256,6 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       padding: 10px 32px;
       text-align: center;
     }
-    .type-banner-credit {
-      background: #006D77;
-    }
     .type-banner-text {
       font-family: 'Oxanium', sans-serif;
       font-size: 18px;
@@ -308,9 +305,6 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
-    .invoice-type-badge.credit {
-      background: #006D77;
-    }
     .invoice-meta { font-size: 13px; }
     .meta-row { display: flex; gap: 8px; justify-content: flex-end; }
     .meta-label { font-weight: 700; color: #555; }
@@ -322,10 +316,6 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       background: linear-gradient(90deg, #D5150D 0%, #D5150D 60%, #222 60%, #222 100%);
       margin: 0 32px;
     }
-    .divider-credit {
-      background: linear-gradient(90deg, #006D77 0%, #006D77 60%, #222 60%, #222 100%);
-    }
-
     /* ========== CLIENT ========== */
     .client-section {
       padding: 18px 32px 14px;
@@ -430,19 +420,14 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       font-size: 15px;
       padding: 10px 16px;
     }
-    .grand-total-credit {
-      background: #006D77;
-    }
-
     /* ========== CREDIT SECTION ========== */
     .credit-section {
       padding: 14px 32px;
       margin: 0 32px;
-      background: #f0fafb;
-      border: 2px solid #006D77;
+      background: #fef2f2;
+      border: 2px solid #D5150D;
       border-radius: 8px;
     }
-    .credit-section .section-title { color: #006D77; }
     .credit-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -456,7 +441,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
     .credit-field.full-width { grid-column: 1 / -1; }
     .credit-field .field-value.highlight {
       font-weight: 800;
-      color: #006D77;
+      color: #D5150D;
       font-size: 14px;
     }
 
@@ -479,11 +464,6 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       letter-spacing: 6px;
       text-transform: uppercase;
     }
-    .stamp-credit {
-      color: #006D77;
-      border-color: #006D77;
-    }
-
     /* ========== FOOTER ========== */
     .footer-section {
       display: flex;
@@ -501,8 +481,6 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       text-transform: uppercase;
       margin-bottom: 4px;
     }
-    .invoice-credit .section-title { color: #006D77; }
-    .invoice-credit .advisor-info h4 { color: #006D77; }
     .advisor-name { font-weight: 700; font-size: 14px; }
     .advisor-info p { font-size: 11px; color: #555; line-height: 1.6; }
     .legal-info {
@@ -519,9 +497,6 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
     .bottom-stripe {
       background: #D5150D;
       padding: 8px 0;
-    }
-    .bottom-stripe-credit {
-      background: #006D77;
     }
     .stripe-inner {
       display: flex;
