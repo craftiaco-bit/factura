@@ -21,9 +21,8 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
 
       <!-- TITLE -->
       <div class="title-section">
-        <div class="title-line-left"></div>
         <h1 class="cert-title">CERTIFICADO DE CUENTA</h1>
-        <div class="title-line-right"></div>
+        <div class="title-underline"></div>
       </div>
 
       <!-- BODY -->
@@ -53,14 +52,14 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
 
       <!-- FOOTER -->
       <div class="footer">
-        <div class="footer-content">
+        <div class="footer-top">
           <img src="/images/image-removebg-preview.png" alt="GSM Grupo Supermotos" class="footer-gsm-logo" />
-          <div class="footer-right">
-            <div class="footer-line"></div>
-            <p class="footer-text">
-              *Importante: este certificado solo hace referencia a los productos mencionados anteriormente.
-            </p>
-          </div>
+          <div class="footer-line"></div>
+        </div>
+        <div class="footer-bar">
+          <p class="footer-text">
+            *Importante: este certificado solo hace referencia a los productos mencionados anteriormente.
+          </p>
         </div>
       </div>
     </div>
@@ -98,9 +97,9 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
     .watermark img { width: 480px; height: auto; opacity: 0.05; }
 
     /* ===== HEADER ===== */
-    .header { flex-shrink: 0; z-index: 1; }
+    .header { flex-shrink: 0; z-index: 1; padding: 16px 24px 0; }
     .header-banner-img {
-      width: 100%;
+      width: 320px;
       height: auto;
       display: block;
     }
@@ -108,24 +107,23 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
     /* ===== TITLE ===== */
     .title-section {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 24px;
-      padding: 36px 56px 0;
+      padding: 24px 56px 0;
       z-index: 1;
       position: relative;
     }
-    .title-line-left, .title-line-right {
-      flex: 1;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #D5150D);
-    }
-    .title-line-right {
-      background: linear-gradient(90deg, #D5150D, transparent);
+    .title-underline {
+      width: 460px;
+      height: 3px;
+      background: #D5150D;
+      margin-top: 8px;
     }
     .cert-title {
       font-family: 'Oxanium', sans-serif;
-      font-size: 40px;
+      font-size: 38px;
       font-weight: 800;
+      font-style: italic;
       color: #D5150D;
       text-align: center;
       white-space: nowrap;
@@ -198,32 +196,34 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
     /* ===== FOOTER ===== */
     .footer {
       flex-shrink: 0;
-      padding: 16px 56px 24px;
       z-index: 1;
       position: relative;
+      margin-top: auto;
     }
-    .footer-content {
+    .footer-top {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
+      padding: 0 40px 12px;
     }
     .footer-gsm-logo {
-      width: 120px;
+      width: 80px;
       height: auto;
       flex-shrink: 0;
     }
-    .footer-right {
-      flex: 1;
-    }
     .footer-line {
+      flex: 1;
       height: 2px;
-      background: #999;
-      margin-bottom: 10px;
+      background: #D5150D;
+    }
+    .footer-bar {
+      background: #D5150D;
+      padding: 10px 40px;
     }
     .footer-text {
       font-size: 11px;
       font-style: italic;
-      color: #777;
+      color: #fff;
       text-align: center;
       line-height: 1.5;
     }
