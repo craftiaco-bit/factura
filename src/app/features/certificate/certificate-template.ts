@@ -16,13 +16,7 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
 
       <!-- HEADER -->
       <div class="header">
-        <div class="header-banner-full">
-          <div class="banner-red-full">
-            <img src="/images/logo-honda.webp" alt="Honda" class="banner-logo" />
-            <span class="banner-text">Come ride with us</span>
-          </div>
-          <div class="banner-blue-full"></div>
-        </div>
+        <img src="/logohondaceti.png" alt="Honda - Come ride with us" class="header-banner-img" />
       </div>
 
       <!-- TITLE -->
@@ -105,40 +99,10 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
 
     /* ===== HEADER ===== */
     .header { flex-shrink: 0; z-index: 1; }
-    .header-banner-full {
-      display: flex;
-      align-items: stretch;
-      height: 56px;
+    .header-banner-img {
       width: 100%;
-    }
-    .banner-red-full {
-      background: #D5150D;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      padding: 0 24px;
-    }
-    .banner-logo {
-      height: 46px;
-      width: auto;
-      filter: brightness(0) invert(1);
-    }
-    .banner-text {
-      font-size: 20px;
-      font-style: italic;
-      color: #fff;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-    }
-    .banner-blue-full {
-      background: #003366;
-      width: 140px;
-      flex-shrink: 0;
-      clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%);
-      margin-left: -20px;
+      height: auto;
+      display: block;
     }
 
     /* ===== TITLE ===== */
@@ -244,7 +208,7 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
       gap: 20px;
     }
     .footer-gsm-logo {
-      width: 90px;
+      width: 120px;
       height: auto;
       flex-shrink: 0;
     }
