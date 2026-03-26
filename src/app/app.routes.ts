@@ -13,10 +13,22 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'cotizaciones',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/quotation/quotation-list').then((m) => m.QuotationList),
+  },
+  {
     path: 'cotizacion',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/quotation/quotation-form').then((m) => m.QuotationForm),
+  },
+  {
+    path: 'cotizacion/editar/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/quotation/quotation-edit').then((m) => m.QuotationEdit),
   },
   {
     path: 'cotizacion/:id',
