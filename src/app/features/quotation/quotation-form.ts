@@ -89,31 +89,56 @@ interface QuotationFormData {
           @if (selectedProduct()) {
             <!-- Product Preview -->
             <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-              @if (selectedProduct()!.images[0]) {
-                <img
-                  [src]="selectedProduct()!.images[0]"
-                  [alt]="selectedProduct()!.name"
-                  class="w-32 h-24 object-contain"
-                />
-              }
+              <img
+                [src]="selectedVariantImage() || selectedProduct()!.images[0]"
+                [alt]="selectedProduct()!.name"
+                class="w-32 h-24 object-contain"
+              />
               <div>
                 <h3 class="font-[Oxanium] font-bold text-lg">{{ selectedProduct()!.name }}</h3>
                 <p class="text-sm text-gray-500">{{ specCount() }} especificaciones</p>
+                @if (form.productColor) {
+                  <p class="text-sm text-[#D5150D] font-semibold">{{ form.productColor }}</p>
+                }
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Color -->
+            <!-- Color Variant Picker -->
+            @if (colorVariants().length > 0) {
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Color / Variante</label>
-                <input
-                  type="text"
-                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
-                  placeholder="Ej: BLANCO NEGRO ROJO"
-                  [ngModel]="form.productColor"
-                  (ngModelChange)="form.productColor = $event"
-                />
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Color / Variante</label>
+                <div class="flex gap-3 overflow-x-auto pb-2">
+                  @for (variant of colorVariants(); track variant.color) {
+                    <button
+                      type="button"
+                      class="flex-shrink-0 flex flex-col items-center gap-1 p-2 rounded-lg border-2 transition-all cursor-pointer hover:shadow-md"
+                      [class.border-[#D5150D]]="form.productColor === variant.color"
+                      [class.border-gray-200]="form.productColor !== variant.color"
+                      [class.ring-2]="form.productColor === variant.color"
+                      [class.ring-[#D5150D]/30]="form.productColor === variant.color"
+                      [class.bg-white]="form.productColor !== variant.color"
+                      [class.bg-red-50]="form.productColor === variant.color"
+                      (click)="selectVariant(variant)"
+                    >
+                      <img
+                        [src]="variant.image"
+                        [alt]="variant.color"
+                        class="w-20 h-16 object-contain"
+                      />
+                      <span
+                        class="text-xs font-medium text-center max-w-[5rem] leading-tight"
+                        [class.text-[#D5150D]]="form.productColor === variant.color"
+                        [class.text-gray-600]="form.productColor !== variant.color"
+                      >
+                        {{ variant.color }}
+                      </span>
+                    </button>
+                  }
+                </div>
               </div>
+            }
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Year -->
               <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Año</label>
@@ -319,6 +344,18 @@ export class QuotationForm {
     return p?.specifications ? Object.keys(p.specifications).length : 0;
   });
 
+  readonly selectedProfile = computed(() => {
+    const slug = this.selectedSlug();
+    if (!slug) return null;
+    return getProductQuotationProfile(slug);
+  });
+
+  readonly colorVariants = computed(() => {
+    return this.selectedProfile()?.colorVariants ?? [];
+  });
+
+  readonly selectedVariantImage = signal('');
+
   form: QuotationFormData = this.getDefaultForm();
 
   private getDefaultForm(): QuotationFormData {
@@ -349,6 +386,21 @@ export class QuotationForm {
 
   onProductChange(slug: string) {
     this.selectedSlug.set(slug);
+    // Auto-select first color variant when product changes
+    if (slug) {
+      const profile = getProductQuotationProfile(slug);
+      if (profile.colorVariants.length > 0) {
+        this.selectVariant(profile.colorVariants[0]);
+      }
+    } else {
+      this.form.productColor = '';
+      this.selectedVariantImage.set('');
+    }
+  }
+
+  selectVariant(variant: { color: string; image: string }) {
+    this.form.productColor = variant.color;
+    this.selectedVariantImage.set(variant.image);
   }
 
   recalculate() {
@@ -370,7 +422,7 @@ export class QuotationForm {
       clientName: this.form.clientName,
       productSlug: product.slug,
       productName: product.name,
-      productImage: product.images[0] || '',
+      productImage: this.selectedVariantImage() || product.images[0] || '',
       productColor: this.form.productColor,
       productYear: this.form.productYear,
       specifications: profile.specifications,
