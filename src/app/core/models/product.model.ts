@@ -8,6 +8,11 @@ export interface Product {
   specifications?: Record<string, string>;
 }
 
+export interface ColorVariant {
+  color: string;
+  image: string;
+}
+
 export interface ParsedDescription {
   subtitle: string;
   body: string;

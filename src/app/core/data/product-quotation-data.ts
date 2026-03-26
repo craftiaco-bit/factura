@@ -13,6 +13,8 @@ export interface ProductQuotationProfile {
   category: string;
   /** Available colors for this model */
   colors: string[];
+  /** Color variants mapping each color to its product image */
+  colorVariants: { color: string; image: string }[];
   /** 3 feature highlight icons for the top section */
   features: { icon: string; label: string }[];
   /** 5-7 benefits for the left column */
@@ -46,6 +48,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Adventure Touring',
     colors: ['Tricolor Rojo/Blanco/Azul', 'Negro Mate', 'Gris Plata'],
+    colorVariants: [
+      { color: 'Tricolor Rojo/Blanco/Azul', image: '/images/products/honda-africa-twin/1a30d440-996b-4f00-8c03-02c28f00c589.avif' },
+      { color: 'Negro Mate', image: '/images/products/honda-africa-twin/82fff5f0-49f0-4b12-ab77-679c2d6f321a.avif' },
+      { color: 'Gris Plata', image: '/images/products/honda-africa-twin/82fff5f0-49f0-4b12-ab77-679c2d6f321a.avif' },
+    ],
     features: [
       { icon: ICONS.suspension, label: 'SUSPENSIÓN\nSHOWA\nAJUSTABLE' },
       { icon: ICONS.abs, label: 'FRENOS ABS\nDOBLE DISCO\nDELANTERO' },
@@ -77,6 +84,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Urbana / Económica',
     colors: ['Negro', 'Rojo', 'Azul'],
+    colorVariants: [
+      { color: 'Negro', image: '/images/products/honda-cb-100/585380b3-f2d5-4d99-9796-b72561c6799a.avif' },
+      { color: 'Rojo', image: '/images/products/honda-cb-100/77dcc59c-24a5-4b0d-903d-423575587e0c.avif' },
+      { color: 'Azul', image: '/images/products/honda-cb-100/83895d33-a712-41d2-b443-ec106cfc8534.avif' },
+    ],
     features: [
       { icon: ICONS.fuel, label: 'ULTRA\nECONÓMICA\nEN COMBUSTIBLE' },
       { icon: ICONS.engine, label: 'MOTOR OHC\nBAJAS\nVIBRACIONES' },
@@ -108,6 +120,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Deportiva Urbana',
     colors: ['Rojo Racing', 'Negro Mate', 'Azul Metálico'],
+    colorVariants: [
+      { color: 'Rojo Racing', image: '/images/products/honda-cb-190r/4b235b21-716b-4525-a73b-f8c19fcb2737.avif' },
+      { color: 'Negro Mate', image: '/images/products/honda-cb-190r/c001a28f-023c-445a-ac0c-af73bfbe61c7.avif' },
+      { color: 'Azul Metálico', image: '/images/products/honda-cb-190r/f9dfa5ce-b813-405e-8fa8-08df5ca28914.avif' },
+    ],
     features: [
       { icon: ICONS.abs, label: 'SISTEMA\nANTIBLOQUEO\nDE FRENOS ABS' },
       { icon: ICONS.led, label: 'ILUMINACIÓN\nFULL LED\n360°' },
@@ -139,6 +156,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#000000',
     category: 'Street Fighter',
     colors: ['Negro Mate', 'Rojo Metálico', 'Gris Oscuro'],
+    colorVariants: [
+      { color: 'Negro Mate', image: '/images/products/honda-cb-300f/df714c63-d52f-4ce5-a060-88f4f1b6a365-1.avif' },
+      { color: 'Rojo Metálico', image: '/images/products/honda-cb-300f/df714c63-d52f-4ce5-a060-88f4f1b6a365-1.avif' },
+      { color: 'Gris Oscuro', image: '/images/products/honda-cb-300f/df714c63-d52f-4ce5-a060-88f4f1b6a365-1.avif' },
+    ],
     features: [
       { icon: ICONS.led, label: 'LUCES LED\nALL AROUND\nCOMPLETAS' },
       { icon: ICONS.usb, label: 'CARGADOR\nUSB-C\nINTEGRADO' },
@@ -170,6 +192,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Classic / Heritage',
     colors: ['Negro Cromado', 'Marrón Vintage', 'Gris Plata'],
+    colorVariants: [
+      { color: 'Negro Cromado', image: '/images/products/honda-cb-350d/82e41a1f-f00a-41ec-ad32-b79ad4c5a043-1.avif' },
+      { color: 'Marrón Vintage', image: '/images/products/honda-cb-350d/82e41a1f-f00a-41ec-ad32-b79ad4c5a043-1.avif' },
+      { color: 'Gris Plata', image: '/images/products/honda-cb-350d/82e41a1f-f00a-41ec-ad32-b79ad4c5a043-1.avif' },
+    ],
     features: [
       { icon: ICONS.engine, label: 'MOTOR 350cc\nREFRIGERADO\nPOR AIRE' },
       { icon: ICONS.gauge, label: 'SONIDO\nÚNICO\nDE ESCAPE' },
@@ -202,6 +229,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Supersport',
     colors: ['Rojo Honda Racing', 'Negro Grand Prix', 'Tricolor HRC'],
+    colorVariants: [
+      { color: 'Rojo Honda Racing', image: '/images/products/honda-cbr-650r/ea82eeca-16c8-40a8-a5c3-2614ae074c97.avif' },
+      { color: 'Negro Grand Prix', image: '/images/products/honda-cbr-650r/ea82eeca-16c8-40a8-a5c3-2614ae074c97.avif' },
+      { color: 'Tricolor HRC', image: '/images/products/honda-cbr-650r/ea82eeca-16c8-40a8-a5c3-2614ae074c97.avif' },
+    ],
     features: [
       { icon: ICONS.suspension, label: 'SUSPENSIÓN\nSHOWA\nSFF-BP' },
       { icon: ICONS.engine, label: 'MOTOR\n4 CILINDROS\nEN LÍNEA' },
@@ -234,6 +266,9 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Enduro / Competición',
     colors: ['Rojo Honda Racing'],
+    colorVariants: [
+      { color: 'Rojo Honda Racing', image: '/images/products/honda-crf-450-rx/9ea58797-b6f7-475b-9584-d140614bbff7.avif' },
+    ],
     features: [
       { icon: ICONS.suspension, label: 'SUSPENSIÓN\nSHOWA 49mm\nAJUSTABLE' },
       { icon: ICONS.engine, label: 'MOTOR\nUNICAM\n450cc' },
@@ -266,6 +301,12 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#004D55',
     category: 'Scooter Urbano',
     colors: ['Azul Perla', 'Negro', 'Gris Plata', 'Rojo'],
+    colorVariants: [
+      { color: 'Azul Perla', image: '/images/products/honda-dio-led-dlx/e9c7a1a5-a799-46f0-b828-77c111363e10-1.avif' },
+      { color: 'Negro', image: '/images/products/honda-dio-led-dlx/e9c7a1a5-a799-46f0-b828-77c111363e10-1.avif' },
+      { color: 'Gris Plata', image: '/images/products/honda-dio-led-dlx/e9c7a1a5-a799-46f0-b828-77c111363e10-1.avif' },
+      { color: 'Rojo', image: '/images/products/honda-dio-led-dlx/e9c7a1a5-a799-46f0-b828-77c111363e10-1.avif' },
+    ],
     features: [
       { icon: ICONS.led, label: 'FAROS LED\nY LUZ DE\nPOSICIÓN' },
       { icon: ICONS.fuel, label: 'EXCELENTE\nRENDIMIENTO\nDE COMBUSTIBLE' },
@@ -297,6 +338,12 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Fun Bike',
     colors: ['Rojo Candy', 'Azul Patriot', 'Naranja Nútmeg', 'Verde Menta'],
+    colorVariants: [
+      { color: 'Rojo Candy', image: '/images/products/honda-navi/129d6e30-b505-41d9-902d-68ffa3a01f45.avif' },
+      { color: 'Azul Patriot', image: '/images/products/honda-navi/1f5e9f22-13eb-423b-a298-d27caf8ad2d6.avif' },
+      { color: 'Naranja Nútmeg', image: '/images/products/honda-navi/6525f40b-5046-4ad5-b89f-b2e126c16507.avif' },
+      { color: 'Verde Menta', image: '/images/products/honda-navi/cfc654e4-532a-4496-9f09-eb9d515e41f4.avif' },
+    ],
     features: [
       { icon: ICONS.engine, label: 'MOTOR\nAUTOMÁTICO\nCVT' },
       { icon: ICONS.fuel, label: 'RENDIMIENTO\nEXTRAORDINARIO\nCOMBUSTIBLE' },
@@ -328,6 +375,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Fun Adventure',
     colors: ['Verde Camuflaje', 'Naranja Arena', 'Negro Mate'],
+    colorVariants: [
+      { color: 'Verde Camuflaje', image: '/images/products/honda-navi-adventure/a6bfca93-1346-4d52-877e-4139e7e0757b.avif' },
+      { color: 'Naranja Arena', image: '/images/products/honda-navi-adventure/a6bfca93-1346-4d52-877e-4139e7e0757b.avif' },
+      { color: 'Negro Mate', image: '/images/products/honda-navi-adventure/a6bfca93-1346-4d52-877e-4139e7e0757b.avif' },
+    ],
     features: [
       { icon: ICONS.adventure, label: 'DISEÑO\nAVENTURA\nÚNICO' },
       { icon: ICONS.engine, label: 'MOTOR\nAUTOMÁTICO\nESP' },
@@ -359,6 +411,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Fun Custom',
     colors: ['Blanco con accesorios', 'Negro con accesorios', 'Rojo con accesorios'],
+    colorVariants: [
+      { color: 'Blanco con accesorios', image: '/images/products/honda-navi-mix/8f3f7f03-48a6-4d66-83f8-15950f48261d.avif' },
+      { color: 'Negro con accesorios', image: '/images/products/honda-navi-mix/8f3f7f03-48a6-4d66-83f8-15950f48261d.avif' },
+      { color: 'Rojo con accesorios', image: '/images/products/honda-navi-mix/8f3f7f03-48a6-4d66-83f8-15950f48261d.avif' },
+    ],
     features: [
       { icon: ICONS.comfort, label: 'ACCESORIOS\nÚNICOS\nDE SERIE' },
       { icon: ICONS.engine, label: 'MOTOR\nAUTOMÁTICO\nSPORT' },
@@ -390,6 +447,9 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Fun Custom Special',
     colors: ['Edición especial con accesorios'],
+    colorVariants: [
+      { color: 'Edición especial con accesorios', image: '/images/products/honda-navi-mix-2/441eb9f9-705b-4663-9be5-f1ad7bdd27af.avif' },
+    ],
     features: [
       { icon: ICONS.comfort, label: 'ACCESORIOS\nPREMIUM\nDE SERIE' },
       { icon: ICONS.engine, label: 'MOTOR\nAUTOMÁTICO\neSP' },
@@ -421,6 +481,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#004D55',
     category: 'Adventure / Doble Propósito',
     colors: ['Negro Mate', 'Rojo Adventure', 'Blanco Rally'],
+    colorVariants: [
+      { color: 'Negro Mate', image: '/images/products/honda-nx-190/42a75675-e2f0-40a8-a4d9-23d473f5c31c.avif' },
+      { color: 'Rojo Adventure', image: '/images/products/honda-nx-190/5e541e59-3169-4f49-88fa-b2b8875a8b98.avif' },
+      { color: 'Blanco Rally', image: '/images/products/honda-nx-190/62947f9d-332b-475f-b822-a323e886e2c8.avif' },
+    ],
     features: [
       { icon: ICONS.adventure, label: 'DOBLE\nPROPÓSITO\nTODO TERRENO' },
       { icon: ICONS.suspension, label: 'SUSPENSIÓN\nDE LARGO\nRECORRIDO' },
@@ -453,6 +518,12 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Scooter Premium',
     colors: ['Blanco Perla', 'Negro Oscuro', 'Gris Mate', 'Azul Mate'],
+    colorVariants: [
+      { color: 'Blanco Perla', image: '/images/products/honda-pcx-160-abs/4918a316-6fce-4dbd-874d-1d1b9b4e4aff.avif' },
+      { color: 'Negro Oscuro', image: '/images/products/honda-pcx-160-abs/4ee08cc4-e6de-48fe-b147-6942dcbd54d8.avif' },
+      { color: 'Gris Mate', image: '/images/products/honda-pcx-160-abs/9de09926-6d0e-41dc-839e-898979a01569.avif' },
+      { color: 'Azul Mate', image: '/images/products/honda-pcx-160-abs/9de09926-6d0e-41dc-839e-898979a01569.avif' },
+    ],
     features: [
       { icon: ICONS.abs, label: 'SISTEMA\nFRENOS ABS\nDE CANAL' },
       { icon: ICONS.led, label: 'ILUMINACIÓN\nFULL LED\nSMART KEY' },
@@ -485,6 +556,12 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Urbana / Trabajo',
     colors: ['Negro', 'Rojo', 'Azul', 'Gris'],
+    colorVariants: [
+      { color: 'Negro', image: '/images/products/honda-wave-110/08bcea55-241d-44cf-bfce-70d9910f7ef7.avif' },
+      { color: 'Rojo', image: '/images/products/honda-wave-110/5d6af84c-5d81-4d17-83a0-ba40ea261ccc.avif' },
+      { color: 'Azul', image: '/images/products/honda-wave-110/e0a2c0c6-ba8c-4104-b2b4-c25c99dfeec8.avif' },
+      { color: 'Gris', image: '/images/products/honda-wave-110/ea496c8f-2f51-4fb0-89a6-2a30c6b2423b.avif' },
+    ],
     features: [
       { icon: ICONS.engine, label: 'MOTOR OHC\nBAJAS\nVIBRACIONES' },
       { icon: ICONS.fuel, label: 'MÁXIMO\nRENDIMIENTO\nCOMBUSTIBLE' },
@@ -516,6 +593,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Adventure Scooter Premium',
     colors: ['Negro Oscuro Mate', 'Gris Titanio', 'Rojo Metalizado'],
+    colorVariants: [
+      { color: 'Negro Oscuro Mate', image: '/images/products/honda-x-adv-750/17478839-7311-4aa0-9df1-18c3d99edd6f.avif' },
+      { color: 'Gris Titanio', image: '/images/products/honda-x-adv-750/4402a492-0d69-4ef2-b10c-6bfc64988396.avif' },
+      { color: 'Rojo Metalizado', image: '/images/products/honda-x-adv-750/f01981e7-c0a3-4c2d-89c3-eef9c9f3ef2b.avif' },
+    ],
     features: [
       { icon: ICONS.engine, label: 'MOTOR\nBICILÍNDRICO\n750cc' },
       { icon: ICONS.abs, label: 'FRENOS ABS\nDOBLE DISCO\nDELANTERO' },
@@ -548,6 +630,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Street Sport',
     colors: ['Naranja Mate', 'Negro Mate', 'Rojo Deportivo'],
+    colorVariants: [
+      { color: 'Naranja Mate', image: '/images/products/honda-xblade-160/0087810b-187f-41fb-b51c-a504b0ac1ab2.avif' },
+      { color: 'Negro Mate', image: '/images/products/honda-xblade-160/032b67c8-2711-4188-a3fa-06dc915d108a.avif' },
+      { color: 'Rojo Deportivo', image: '/images/products/honda-xblade-160/74e23a3b-b206-406d-8007-ccc7ca2f39b6.avif' },
+    ],
     features: [
       { icon: ICONS.engine, label: 'MOTOR\n160cc ALTO\nRENDIMIENTO' },
       { icon: ICONS.led, label: 'ILUMINACIÓN\nLED AGRESIVA\n360°' },
@@ -579,6 +666,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Enduro / Doble Propósito',
     colors: ['Rojo Honda', 'Negro Rally', 'Blanco'],
+    colorVariants: [
+      { color: 'Rojo Honda', image: '/images/products/honda-xr-300l/954695f4-a594-4695-8dd6-9612b6006a7e.avif' },
+      { color: 'Negro', image: '/images/products/honda-xr-300l/b671dbe7-3c11-4415-86d3-db6e047a7f0c.avif' },
+      { color: 'Blanco', image: '/images/products/honda-xr-300l/d10ef337-913b-494c-9e71-94ace5404fd8.avif' },
+    ],
     features: [
       { icon: ICONS.engine, label: 'MOTOR\n293.5 cc\nREAL' },
       { icon: ICONS.suspension, label: 'SUSPENSIÓN\nDE ALTA\nTECNOLOGÍA' },
@@ -611,6 +703,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Doble Propósito',
     colors: ['Rojo Honda', 'Negro', 'Blanco'],
+    colorVariants: [
+      { color: 'Rojo Honda', image: '/images/products/honda-xr190l-abs/0b5943a9-8a26-4185-a30f-8ef53a0a44a2.avif' },
+      { color: 'Negro Rally', image: '/images/products/honda-xr190l-abs/6e9f0b55-93ba-4747-ac7d-62f07fe8200c.avif' },
+      { color: 'Blanco', image: '/images/products/honda-xr190l-abs/eac9ede2-d243-43f0-a693-d94dab88b8b3.avif' },
+    ],
     features: [
       { icon: ICONS.abs, label: 'SISTEMA\nANTIBLOQUEO\nDE FRENOS' },
       { icon: ICONS.lightning, label: 'SISTEMA DE\nENCENDIDO\nAUTOMÁTICO' },
@@ -643,6 +740,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Adventure Touring',
     colors: ['Arena Dorado', 'Negro Aventura', 'Rojo Rally'],
+    colorVariants: [
+      { color: 'Arena Dorado', image: '/images/products/honda-xre-300-sahara/8140f68f-7772-4eb4-832c-24ebe396b044.avif' },
+      { color: 'Negro Aventura', image: '/images/products/honda-xre-300-sahara/f51df882-bb0f-4816-b0e4-b8b819da10f2-1.avif' },
+      { color: 'Rojo Rally', image: '/images/products/honda-xre-300-sahara/f51df882-bb0f-4816-b0e4-b8b819da10f2.avif' },
+    ],
     features: [
       { icon: ICONS.adventure, label: 'LISTA PARA\nLA AVENTURA\nTOTAL' },
       { icon: ICONS.suspension, label: 'SUSPENSIÓN\nINVERTIDA\nPRO-LINK' },
@@ -675,6 +777,11 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#8B0000',
     category: 'Sport Urbana',
     colors: ['Rojo Deportivo', 'Azul Metálico', 'Negro'],
+    colorVariants: [
+      { color: 'Rojo Deportivo', image: '' },
+      { color: 'Azul Metálico', image: '' },
+      { color: 'Negro', image: '' },
+    ],
     features: [
       { icon: ICONS.fuel, label: 'MÁXIMA\nEFICIENCIA\nCOMBUSTIBLE' },
       { icon: ICONS.led, label: 'FAROS LED\nDISEÑO\nAERODINÁMICO' },
@@ -706,6 +813,10 @@ export const PRODUCT_QUOTATION_DATA: Record<string, ProductQuotationProfile> = {
     accentDark: '#000000',
     category: 'Sport Urbana Premium',
     colors: ['Negro Premium', 'Gris Grafito'],
+    colorVariants: [
+      { color: 'Negro Premium', image: '' },
+      { color: 'Gris Grafito', image: '' },
+    ],
     features: [
       { icon: ICONS.digital, label: 'TABLERO\nDIGITAL\nCOMPLETO' },
       { icon: ICONS.led, label: 'ILUMINACIÓN\nFULL LED\nPREMIUM' },
@@ -741,6 +852,9 @@ export function getProductQuotationProfile(slug: string): ProductQuotationProfil
     accentDark: '#8B0000',
     category: 'Motocicleta Honda',
     colors: ['Consultar disponibilidad'],
+    colorVariants: [
+      { color: 'Consultar disponibilidad', image: '' },
+    ],
     features: [
       { icon: ICONS.shield, label: 'GARANTÍA\nHONDA\n2 AÑOS' },
       { icon: ICONS.engine, label: 'MOTOR\nHONDA\nCONFIABLE' },
