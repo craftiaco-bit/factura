@@ -60,5 +60,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/invoice/invoice-view').then((m) => m.InvoiceView),
   },
+  {
+    path: 'moto/:slug',
+    loadComponent: () =>
+      import('./features/moto/moto-info').then((m) => m.MotoInfo),
+  },
   { path: '**', redirectTo: 'cotizacion' },
 ];
