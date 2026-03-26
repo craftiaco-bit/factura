@@ -88,8 +88,17 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
 
       <!-- DREAM BANNER -->
       <div class="dream-banner">
+        <div class="dream-stripes-left">
+          <span class="ds"></span>
+          <span class="ds"></span>
+          <span class="ds"></span>
+          <span class="ds"></span>
+          <span class="ds"></span>
+          <span class="ds"></span>
+          <span class="ds"></span>
+        </div>
         <span class="dream-text">HAZ TU SUEÑO REALIDAD</span>
-        <div class="dream-stripes">
+        <div class="dream-stripes-right">
           <span class="ds"></span>
           <span class="ds"></span>
           <span class="ds"></span>
@@ -113,8 +122,9 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
           @for (benefit of dataBenefits(); track $index) {
             <div class="benefit-item">
               <div class="benefit-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" [attr.stroke]="accent()" stroke-width="2" width="20" height="20">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                  <circle cx="12" cy="12" r="11" [attr.fill]="accent()" stroke="none"/>
+                  <polyline points="7 12 10.5 15.5 17 9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
               <p>{{ benefit }}</p>
@@ -249,6 +259,18 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
             <span class="cts"></span>
             <span class="cts"></span>
             <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
+            <span class="cts"></span>
           </div>
         </div>
         <div class="contact-content">
@@ -346,13 +368,13 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       letter-spacing: 3px;
     }
     .header-stripes {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent) 0%, #999 100%);
       display: flex;
       gap: 6px;
       flex: 1;
       align-items: center;
-      justify-content: center;
-      padding: 0 10px;
+      justify-content: flex-end;
+      padding: 0 14px;
     }
     .stripe {
       width: 7px;
@@ -403,8 +425,8 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       margin-bottom: 6px;
     }
 
-    .date-row { padding: 10px 24px; border-bottom: 2.5px solid var(--accent); }
-    .date-text { font-family: 'Poppins', sans-serif; font-size: 14px; color: #222; }
+    .date-row { padding: 10px 24px; border-bottom: 2.5px solid var(--accent); background: #fff; }
+    .date-text { font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--accent); }
 
     .greeting-area {
       padding: 20px 24px 14px;
@@ -418,7 +440,6 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       font-size: 26px;
       font-weight: 800;
       margin: 0 0 4px;
-      font-style: italic;
       color: var(--accent);
     }
     .client-name {
@@ -485,43 +506,43 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
     .dream-banner {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      background: var(--accent);
-      padding: 7px 20px;
-      gap: 14px;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent) 0%, #a01010 50%, var(--accent) 100%);
+      padding: 9px 20px;
+      gap: 16px;
     }
     .dream-text {
       font-family: 'Oxanium', sans-serif;
       font-size: 24px;
       font-weight: 800;
       color: #fff;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       font-style: italic;
+      white-space: nowrap;
     }
-    .dream-stripes { display: flex; gap: 5px; }
+    .dream-stripes-left, .dream-stripes-right { display: flex; gap: 5px; }
     .ds {
       width: 7px;
       height: 30px;
-      background: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.35);
       transform: skewX(-18deg);
       border-radius: 1px;
     }
 
     /* ========== PRODUCT NAME BAR ========== */
     .product-name-bar {
-      background: #f7f7f7;
+      background: #222222;
       padding: 10px 24px;
-      border-bottom: 3px solid var(--accent);
     }
     .product-name-bar h2 {
       font-family: 'Oxanium', sans-serif;
       font-size: 28px;
       font-weight: 800;
-      color: var(--accent-dark);
+      color: #fff;
       margin: 0;
       text-align: center;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
     /* ========== THREE COLUMNS ========== */
@@ -539,7 +560,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       text-underline-offset: 3px;
       margin: 0 0 12px;
       text-align: center;
-      color: var(--accent-dark);
+      color: #222;
     }
 
     /* Benefits */
@@ -556,45 +577,47 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       font-size: 10.5px;
       white-space: nowrap;
       vertical-align: top;
-      color: var(--accent-dark);
+      color: var(--accent);
     }
     .spec-value { padding: 3px 0; font-size: 10.5px; vertical-align: top; }
 
     /* Pricing */
     .pricing-subtitle {
       font-family: 'Oxanium', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       text-align: center;
       margin: 0 0 10px;
       font-style: italic;
+      color: #444;
     }
     .pricing-table { width: 100%; border-collapse: collapse; }
+    .pricing-table tr { border-bottom: 1px solid #eee; }
     .price-label {
       font-weight: 700;
-      padding: 5px 6px 5px 0;
-      font-size: 11.5px;
+      padding: 4px 6px 4px 0;
+      font-size: 10.5px;
       vertical-align: top;
       color: var(--accent);
     }
     .price-value {
       text-align: right;
-      padding: 5px 0;
-      font-size: 12px;
+      padding: 4px 0;
+      font-size: 11px;
       white-space: nowrap;
       vertical-align: top;
       font-weight: 500;
     }
-    .total-row { border-top: 2.5px solid var(--accent); }
+    .total-row { border-top: 2.5px solid var(--accent); border-bottom: none !important; }
     .total-row .price-label {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       padding-top: 8px;
       padding-bottom: 8px;
     }
     .total-value {
       font-weight: 800 !important;
-      font-size: 14px !important;
+      font-size: 13px !important;
       color: var(--accent);
       padding-top: 8px !important;
       padding-bottom: 8px !important;
@@ -602,8 +625,16 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
 
     /* ========== DISCLAIMERS ========== */
     .disclaimers { padding: 8px 24px; text-align: center; font-size: 9px; color: #666; line-height: 1.5; }
-    .disclaimers p { margin: 1px 0; }
-    .disclaimer-highlight { color: var(--accent); font-weight: 600; }
+    .disclaimers p { margin: 2px 0; }
+    .disclaimer-highlight {
+      color: var(--accent);
+      font-weight: 600;
+      border: 1.5px solid var(--accent);
+      border-radius: 3px;
+      padding: 4px 10px;
+      display: inline-block;
+      margin-top: 4px !important;
+    }
 
     /* ========== WARRANTY SECTION ========== */
     .warranty-section { display: flex; padding: 10px 24px; gap: 20px; align-items: center; }
@@ -655,15 +686,15 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
     .qr-label { font-size: 8px; text-align: center; color: #666; font-weight: 600; text-transform: uppercase; line-height: 1.3; }
 
     /* ========== DELIVERY INFO ========== */
-    .delivery-info { padding: 8px 24px; }
-    .delivery-info p { margin: 0; font-size: 11px; line-height: 1.6; }
+    .delivery-info { padding: 6px 24px; }
+    .delivery-info p { margin: 0; font-size: 10px; line-height: 1.6; color: #333; }
 
     /* ========== HONDA MESSAGE ========== */
-    .honda-message { background: var(--accent); padding: 10px 24px; margin-top: auto; }
-    .honda-message p { margin: 0; font-size: 11px; color: #fff; text-align: center; line-height: 1.5; font-weight: 500; }
+    .honda-message { background: var(--accent); padding: 8px 24px; margin-top: auto; }
+    .honda-message p { margin: 0; font-size: 10px; color: #fff; text-align: center; line-height: 1.5; font-weight: 500; }
 
     /* ========== CONTACT FOOTER ========== */
-    .contact-footer { border-top: 3px solid #222; }
+    .contact-footer { border-top: 2px solid #222; }
     .contact-header {
       display: flex;
       align-items: center;
@@ -678,10 +709,10 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       margin: 0;
       white-space: nowrap;
       letter-spacing: 1px;
-      color: var(--accent-dark);
+      color: var(--accent);
     }
-    .contact-title-stripes { display: flex; gap: 5px; align-items: center; }
-    .cts { width: 6px; height: 30px; background: #ddd; transform: skewX(-18deg); border-radius: 1px; }
+    .contact-title-stripes { display: flex; gap: 5px; align-items: center; flex: 1; }
+    .cts { width: 6px; height: 28px; background: #ddd; transform: skewX(-18deg); border-radius: 1px; }
     .contact-content { display: flex; padding: 10px 24px 14px; gap: 20px; }
     .contact-left { flex: 1.4; }
     .contact-table { width: 100%; border-collapse: collapse; }
@@ -691,7 +722,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
     .contact-right { flex: 0.6; text-align: right; font-size: 11px; display: flex; flex-direction: column; justify-content: center; }
     .contact-right p { margin: 1px 0; }
     .valid-label { font-size: 12px; }
-    .valid-date { font-weight: 800; font-size: 14px; color: var(--accent-dark); }
+    .valid-date { font-weight: 800; font-size: 14px; color: var(--accent); }
     .conditions { font-size: 10px; color: #555; margin-top: 4px !important; }
     .price-change-note { font-size: 10px; color: #555; }
   `,
@@ -712,7 +743,7 @@ export class QuotationTemplate {
     effect(() => {
       const q = this.data();
       if (q && isPlatformBrowser(this.platformId)) {
-        this.generateQR(q.id);
+        this.generateQR(q.productSlug);
       }
     });
   }
@@ -722,12 +753,12 @@ export class QuotationTemplate {
     return this.sanitizer.bypassSecurityTrustHtml(svg);
   }
 
-  private async generateQR(id: string) {
+  private async generateQR(productSlug: string) {
     try {
       const mod = await import('qrcode');
       const toString = mod.toString ?? mod.default?.toString;
       if (!toString) return;
-      const url = `${window.location.origin}/factu/${id}`;
+      const url = `${window.location.origin}/moto/${productSlug}`;
       const svg: string = await toString(url, {
         type: 'svg',
         width: 220,
