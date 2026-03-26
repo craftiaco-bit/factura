@@ -7,7 +7,7 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-login',
   imports: [FormsModule],
   template: `
-    <div class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+    <div class="min-h-screen bg-gray-100 flex items-start justify-center px-4 pt-16 sm:pt-24 md:items-center md:pt-0">
       <div class="w-full max-w-md">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
           <!-- Header -->
