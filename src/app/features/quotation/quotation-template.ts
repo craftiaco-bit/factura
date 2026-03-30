@@ -56,6 +56,15 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
           <div class="greeting-area">
             <h3 class="greeting-label">Estimado(a):</h3>
             <h2 class="client-name">{{ data().clientName }}</h2>
+            @if (data().clientDocument) {
+              <p class="client-detail">C.C. {{ data().clientDocument }}</p>
+            }
+            @if (data().clientEmail) {
+              <p class="client-detail">{{ data().clientEmail }}</p>
+            }
+            @if (data().clientAddress) {
+              <p class="client-detail">{{ data().clientAddress }}</p>
+            }
             <p class="greeting-text">
               Bienvenido(a) a Honda, la marca donde los sueños
               se hacen realidad, agradecemos tu confianza e
@@ -160,11 +169,11 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
             </tr>
             <tr>
               <td class="price-label">Casco:</td>
-              <td class="price-value">{{ data().helmetValue | currencyCop }}</td>
+              <td class="price-value">{{ data().helmetIncluded ? 'Incluido' : 'No incluido' }}</td>
             </tr>
             <tr>
               <td class="price-label">Accesorios:</td>
-              <td class="price-value">{{ data().accessoriesValue | currencyCop }}</td>
+              <td class="price-value">{{ data().accessoriesIncluded ? 'Incluidos' : 'No incluidos' }}</td>
             </tr>
             <tr>
               <td class="price-label">Valor Matrícula:</td>
@@ -178,8 +187,14 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
               <td class="price-label">Cantidad:</td>
               <td class="price-value">{{ data().quantity }}</td>
             </tr>
+            @if (data().paymentType === 'credito' && data().initialPayment) {
+              <tr>
+                <td class="price-label">Cuota inicial:</td>
+                <td class="price-value">{{ data().initialPayment | currencyCop }}</td>
+              </tr>
+            }
             <tr class="total-row">
-              <td class="price-label">Total a pagar:</td>
+              <td class="price-label">{{ data().paymentType === 'credito' && data().initialPayment ? 'Saldo a financiar:' : 'Total a pagar:' }}</td>
               <td class="price-value total-value">{{ data().total | currencyCop }}</td>
             </tr>
           </table>
@@ -280,6 +295,12 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
                 <td class="contact-label">Nuestro Asesor:</td>
                 <td class="contact-value">{{ data().advisorName }}, estará atento a resolver sus inquietudes.</td>
               </tr>
+              @if (data().advisorDocument) {
+                <tr>
+                  <td class="contact-label">Cédula:</td>
+                  <td class="contact-value">{{ data().advisorDocument }}</td>
+                </tr>
+              }
               <tr>
                 <td class="contact-label">Teléfono:</td>
                 <td class="contact-value">{{ data().advisorPhone }}</td>
@@ -451,7 +472,8 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       text-transform: uppercase;
       line-height: 1.1;
     }
-    .greeting-text { font-size: 15px; line-height: 1.7; color: #333; margin: 0; }
+    .client-detail { font-size: 13px; color: #555; margin: 2px 0; }
+    .greeting-text { font-size: 15px; line-height: 1.7; color: #333; margin: 8px 0 0; }
 
     .product-image { max-width: 340px; max-height: 210px; width: 100%; object-fit: contain; }
     .image-ref { font-size: 9px; color: #999; margin: 3px 0 8px; font-style: italic; }

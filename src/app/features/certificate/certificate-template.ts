@@ -44,7 +44,7 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
 
       <!-- SIGNATURE -->
       <div class="signature">
-        <img [src]="signatureImg" alt="" class="sig-img" />
+        <img src="/firma.png" alt="" class="sig-img" />
         <div class="sig-line"></div>
         <p class="sig-name">{{ data().signerName }}</p>
         <p class="sig-role"><em>{{ data().signerRole }}</em></p>
@@ -99,7 +99,7 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
     /* ===== HEADER ===== */
     .header { flex-shrink: 0; z-index: 1; padding: 16px 24px 0; }
     .header-banner-img {
-      width: 420px;
+      width: 600px;
       height: auto;
       display: block;
     }
@@ -170,10 +170,10 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
       position: relative;
     }
     .sig-img {
-      width: 260px;
-      height: 80px;
+      width: 320px;
+      height: 140px;
       display: block;
-      margin: 0 auto -8px;
+      margin: 0 auto -16px;
       object-fit: contain;
     }
     .sig-line {

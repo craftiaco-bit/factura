@@ -12,6 +12,9 @@ export interface Quotation {
   date: string;
   validUntil: string;
   clientName: string;
+  clientDocument: string;
+  clientEmail: string;
+  clientAddress: string;
   productSlug: string;
   productName: string;
   productImage: string;
@@ -25,13 +28,15 @@ export interface Quotation {
   category: string;
   priceWithTax: number;
   soatValue: number;
-  helmetValue: number;
-  accessoriesValue: number;
+  helmetIncluded: boolean;
+  accessoriesIncluded: boolean;
   registrationValue: number;
   insuranceValue: number;
   quantity: number;
   total: number;
+  initialPayment: number;
   advisorName: string;
+  advisorDocument: string;
   advisorPhone: string;
   advisorEmail: string;
   advisorAddress: string;
