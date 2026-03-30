@@ -99,7 +99,7 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
     /* ===== HEADER ===== */
     .header { flex-shrink: 0; z-index: 1; padding: 16px 24px 0; }
     .header-banner-img {
-      width: 600px;
+      width: 720px;
       height: auto;
       display: block;
     }
@@ -173,7 +173,7 @@ const SIGNATURE_DATA_URI = `data:image/svg+xml;base64,${typeof btoa !== 'undefin
       width: 320px;
       height: 140px;
       display: block;
-      margin: 0 auto -16px;
+      margin: 25px auto -16px;
       object-fit: contain;
     }
     .sig-line {
