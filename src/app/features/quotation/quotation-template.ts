@@ -556,7 +556,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       background: #222222;
       padding: 10px 24px;
     }
-    .product-name-bar h2 {
+    :host .quotation-page .product-name-bar h2 {
       font-family: 'Oxanium', sans-serif;
       font-size: 28px;
       font-weight: 800;
