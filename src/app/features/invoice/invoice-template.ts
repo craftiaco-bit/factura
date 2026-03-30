@@ -356,7 +356,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
     }
     .product-image-area { flex-shrink: 0; }
     .product-img { width: 160px; height: 100px; object-fit: contain; }
-    .product-name {
+    .product-details .product-name {
       font-family: 'Oxanium', sans-serif;
       font-size: 22px;
       font-weight: 800;

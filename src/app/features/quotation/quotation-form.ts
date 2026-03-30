@@ -13,17 +13,22 @@ interface QuotationFormData {
   productColor: string;
   productYear: number;
   clientName: string;
+  clientDocument: string;
+  clientEmail: string;
+  clientAddress: string;
   date: string;
   validUntil: string;
   priceWithTax: number;
   soatValue: number;
-  helmetValue: number;
-  accessoriesValue: number;
+  helmetIncluded: boolean;
+  accessoriesIncluded: boolean;
   registrationValue: number;
   insuranceValue: number;
   quantity: number;
   total: number;
+  initialPayment: number;
   advisorName: string;
+  advisorDocument: string;
   advisorPhone: string;
   advisorEmail: string;
   advisorAddress: string;
@@ -152,15 +157,50 @@ interface QuotationFormData {
             </div>
 
             <!-- Client -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-1">Nombre del Cliente</label>
-              <input
-                type="text"
-                class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
-                placeholder="Nombre completo del cliente"
-                [ngModel]="form.clientName"
-                (ngModelChange)="form.clientName = $event"
-              />
+            <h3 class="font-[Oxanium] font-bold text-lg border-b-2 border-[#D5150D] pb-2">
+              Datos del Cliente
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Nombre del Cliente</label>
+                <input
+                  type="text"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                  placeholder="Nombre completo del cliente"
+                  [ngModel]="form.clientName"
+                  (ngModelChange)="form.clientName = $event"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Cédula</label>
+                <input
+                  type="text"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                  placeholder="Número de cédula"
+                  [ngModel]="form.clientDocument"
+                  (ngModelChange)="form.clientDocument = $event"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Correo</label>
+                <input
+                  type="email"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                  placeholder="correo@ejemplo.com"
+                  [ngModel]="form.clientEmail"
+                  (ngModelChange)="form.clientEmail = $event"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Dirección</label>
+                <input
+                  type="text"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                  placeholder="Dirección del cliente"
+                  [ngModel]="form.clientAddress"
+                  (ngModelChange)="form.clientAddress = $event"
+                />
+              </div>
             </div>
 
             <!-- Date / Valid Until -->
@@ -208,23 +248,29 @@ interface QuotationFormData {
                   (ngModelChange)="form.soatValue = $event; recalculate()"
                 />
               </div>
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Casco</label>
-                <input
-                  type="number"
-                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
-                  [ngModel]="form.helmetValue"
-                  (ngModelChange)="form.helmetValue = $event; recalculate()"
-                />
+              <div class="flex items-center gap-3 py-2">
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    class="sr-only peer"
+                    [ngModel]="form.helmetIncluded"
+                    (ngModelChange)="form.helmetIncluded = $event"
+                  />
+                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#D5150D]/30 rounded-full peer peer-checked:bg-[#D5150D] after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+                </label>
+                <span class="text-sm font-semibold text-gray-700">Casco incluido</span>
               </div>
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Accesorios</label>
-                <input
-                  type="number"
-                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
-                  [ngModel]="form.accessoriesValue"
-                  (ngModelChange)="form.accessoriesValue = $event; recalculate()"
-                />
+              <div class="flex items-center gap-3 py-2">
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    class="sr-only peer"
+                    [ngModel]="form.accessoriesIncluded"
+                    (ngModelChange)="form.accessoriesIncluded = $event"
+                  />
+                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#D5150D]/30 rounded-full peer peer-checked:bg-[#D5150D] after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+                </label>
+                <span class="text-sm font-semibold text-gray-700">Accesorios incluidos</span>
               </div>
               <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Valor Matrícula</label>
@@ -254,6 +300,17 @@ interface QuotationFormData {
                   (ngModelChange)="form.quantity = $event; recalculate()"
                 />
               </div>
+              @if (paymentType() === 'credito') {
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">Cuota Inicial</label>
+                  <input
+                    type="number"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                    [ngModel]="form.initialPayment"
+                    (ngModelChange)="form.initialPayment = $event; recalculate()"
+                  />
+                </div>
+              }
               <div class="flex items-end">
                 <div class="w-full bg-gray-50 border-2 border-[#D5150D] rounded-lg px-4 py-2">
                   <span class="text-sm text-gray-500">Total a pagar:</span>
@@ -276,6 +333,16 @@ interface QuotationFormData {
                   class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
                   [ngModel]="form.advisorName"
                   (ngModelChange)="form.advisorName = $event"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Cédula del Asesor</label>
+                <input
+                  type="text"
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                  placeholder="Número de cédula"
+                  [ngModel]="form.advisorDocument"
+                  (ngModelChange)="form.advisorDocument = $event"
                 />
               </div>
               <div>
@@ -367,17 +434,22 @@ export class QuotationForm {
       productColor: '',
       productYear: today.getFullYear(),
       clientName: '',
+      clientDocument: '',
+      clientEmail: '',
+      clientAddress: '',
       date: this.formatDateISO(today),
       validUntil: this.formatDateISO(validUntil),
       priceWithTax: 0,
       soatValue: 343300,
-      helmetValue: 0,
-      accessoriesValue: 0,
+      helmetIncluded: false,
+      accessoriesIncluded: false,
       registrationValue: 440000,
       insuranceValue: 0,
       quantity: 1,
       total: 783300,
+      initialPayment: 0,
       advisorName: '',
+      advisorDocument: '',
       advisorPhone: this.siteConfig.config().phone,
       advisorEmail: '',
       advisorAddress: this.siteConfig.config().address,
@@ -420,6 +492,9 @@ export class QuotationForm {
       date: this.form.date,
       validUntil: this.form.validUntil,
       clientName: this.form.clientName,
+      clientDocument: this.form.clientDocument,
+      clientEmail: this.form.clientEmail,
+      clientAddress: this.form.clientAddress,
       productSlug: product.slug,
       productName: product.name,
       productImage: this.selectedVariantImage() || product.images[0] || '',
@@ -433,13 +508,15 @@ export class QuotationForm {
       category: profile.category,
       priceWithTax: Number(this.form.priceWithTax),
       soatValue: Number(this.form.soatValue),
-      helmetValue: Number(this.form.helmetValue),
-      accessoriesValue: Number(this.form.accessoriesValue),
+      helmetIncluded: this.form.helmetIncluded,
+      accessoriesIncluded: this.form.accessoriesIncluded,
       registrationValue: Number(this.form.registrationValue),
       insuranceValue: Number(this.form.insuranceValue),
       quantity: Number(this.form.quantity),
       total: Number(this.form.total),
+      initialPayment: Number(this.form.initialPayment),
       advisorName: this.form.advisorName,
+      advisorDocument: this.form.advisorDocument,
       advisorPhone: this.form.advisorPhone,
       advisorEmail: this.form.advisorEmail,
       advisorAddress: this.form.advisorAddress,

@@ -60,6 +60,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       date TEXT NOT NULL,
       valid_until TEXT DEFAULT '',
       client_name TEXT NOT NULL DEFAULT '',
+      client_document TEXT DEFAULT '',
+      client_email TEXT DEFAULT '',
+      client_address TEXT DEFAULT '',
       product_slug TEXT NOT NULL DEFAULT '',
       product_name TEXT NOT NULL DEFAULT '',
       product_image TEXT DEFAULT '',
@@ -73,19 +76,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       category TEXT DEFAULT '',
       price_with_tax NUMERIC DEFAULT 0,
       soat_value NUMERIC DEFAULT 0,
-      helmet_value NUMERIC DEFAULT 0,
-      accessories_value NUMERIC DEFAULT 0,
+      helmet_included BOOLEAN DEFAULT false,
+      accessories_included BOOLEAN DEFAULT false,
       registration_value NUMERIC DEFAULT 0,
       insurance_value NUMERIC DEFAULT 0,
       quantity INTEGER DEFAULT 1,
       total NUMERIC DEFAULT 0,
+      initial_payment NUMERIC DEFAULT 0,
       advisor_name TEXT DEFAULT '',
+      advisor_document TEXT DEFAULT '',
       advisor_phone TEXT DEFAULT '',
       advisor_email TEXT DEFAULT '',
       advisor_address TEXT DEFAULT '',
       created_at TEXT NOT NULL
     )
   `);
+
+  // Add new columns to existing quotations table (safe: IF NOT EXISTS prevents errors on re-run)
+  const alterQueries = [
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS client_document TEXT DEFAULT ''`,
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS client_email TEXT DEFAULT ''`,
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS client_address TEXT DEFAULT ''`,
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS advisor_document TEXT DEFAULT ''`,
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS helmet_included BOOLEAN DEFAULT false`,
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS accessories_included BOOLEAN DEFAULT false`,
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS initial_payment NUMERIC DEFAULT 0`,
+  ];
+  for (const q of alterQueries) {
+    await sql(q);
+  }
 
   return res.status(200).json({ message: 'Migration completed' });
 }

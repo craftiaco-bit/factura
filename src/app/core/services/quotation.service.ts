@@ -68,14 +68,13 @@ export class QuotationService {
   }
 
   calculateTotal(q: Partial<Quotation>): number {
-    return (
+    const subtotal = (
       (q.priceWithTax ?? 0) +
       (q.soatValue ?? 0) +
-      (q.helmetValue ?? 0) +
-      (q.accessoriesValue ?? 0) +
       (q.registrationValue ?? 0) +
       (q.insuranceValue ?? 0)
     ) * (q.quantity ?? 1);
+    return subtotal - (q.initialPayment ?? 0);
   }
 
   private readLocal(): Quotation[] {
