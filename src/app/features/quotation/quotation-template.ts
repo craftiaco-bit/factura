@@ -197,6 +197,16 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
               <td class="price-label">{{ data().paymentType === 'credito' && data().initialPayment ? 'Saldo a financiar:' : 'Total a pagar:' }}</td>
               <td class="price-value total-value">{{ data().total | currencyCop }}</td>
             </tr>
+            @if (data().paymentType === 'credito' && data().installments) {
+              <tr>
+                <td class="price-label">No. de cuotas:</td>
+                <td class="price-value">{{ data().installments }}</td>
+              </tr>
+              <tr class="monthly-row">
+                <td class="price-label">Cuota mensual:</td>
+                <td class="price-value monthly-value">{{ data().monthlyPayment | currencyCop }}</td>
+              </tr>
+            }
           </table>
         </div>
       </div>
@@ -317,7 +327,7 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
           </div>
           <div class="contact-right">
             <p class="valid-label">Cotización válida hasta</p>
-            <p class="valid-date">{{ data().validUntil }}</p>
+            <p class="valid-date">{{ formatDate(data().validUntil) }}{{ data().validUntilTime ? ' — ' + data().validUntilTime : '' }}</p>
             <p class="conditions">Aplican condiciones y restricciones.</p>
             <p class="price-change-note">*El precio de los productos puede<br/>cambiar sin previo aviso</p>
           </div>
@@ -644,6 +654,9 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
       padding-top: 8px !important;
       padding-bottom: 8px !important;
     }
+    .monthly-row { border-top: 2px solid var(--accent); border-bottom: none !important; background: #fef2f2; }
+    .monthly-row .price-label { font-size: 11px; font-weight: 800; padding-top: 6px; padding-bottom: 6px; }
+    .monthly-value { font-weight: 800 !important; font-size: 12px !important; color: var(--accent); padding-top: 6px !important; padding-bottom: 6px !important; }
 
     /* ========== DISCLAIMERS ========== */
     .disclaimers { padding: 8px 24px; text-align: center; font-size: 9px; color: #666; line-height: 1.5; }

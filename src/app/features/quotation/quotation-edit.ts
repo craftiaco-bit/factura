@@ -29,6 +29,9 @@ interface QuotationFormData {
   quantity: number;
   total: number;
   initialPayment: number;
+  installments: number;
+  monthlyPayment: number;
+  validUntilTime: string;
   advisorName: string;
   advisorDocument: string;
   advisorPhone: string;
@@ -233,12 +236,20 @@ interface QuotationFormData {
                 </div>
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-1">Válida hasta</label>
-                  <input
-                    type="date"
-                    class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
-                    [ngModel]="form.validUntil"
-                    (ngModelChange)="form.validUntil = $event"
-                  />
+                  <div class="flex gap-2">
+                    <input
+                      type="date"
+                      class="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                      [ngModel]="form.validUntil"
+                      (ngModelChange)="form.validUntil = $event"
+                    />
+                    <input
+                      type="time"
+                      class="w-32 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                      [ngModel]="form.validUntilTime"
+                      (ngModelChange)="form.validUntilTime = $event"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -327,6 +338,16 @@ interface QuotationFormData {
                       (ngModelChange)="form.initialPayment = $event; recalculate()"
                     />
                   </div>
+                  <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">No. de Cuotas</label>
+                    <input
+                      type="number"
+                      min="1"
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                      [ngModel]="form.installments"
+                      (ngModelChange)="form.installments = $event; recalculate()"
+                    />
+                  </div>
                 }
                 <div class="flex items-end">
                   <div class="w-full bg-gray-50 border-2 border-[#D5150D] rounded-lg px-4 py-2">
@@ -336,6 +357,16 @@ interface QuotationFormData {
                     </span>
                   </div>
                 </div>
+                @if (paymentType() === 'credito' && form.monthlyPayment > 0) {
+                  <div class="flex items-end">
+                    <div class="w-full bg-[#fef2f2] border-2 border-[#D5150D] rounded-lg px-4 py-2">
+                      <span class="text-sm text-gray-500">Cuota mensual:</span>
+                      <span class="block font-[Oxanium] font-bold text-xl text-[#D5150D]">
+                        {{ form.monthlyPayment | currencyCop }}
+                      </span>
+                    </div>
+                  </div>
+                }
               </div>
 
               <!-- ADVISOR -->
@@ -474,6 +505,9 @@ export class QuotationEdit implements OnInit {
     quantity: 1,
     total: 0,
     initialPayment: 0,
+    installments: 12,
+    monthlyPayment: 0,
+    validUntilTime: '',
     advisorName: '',
     advisorDocument: '',
     advisorPhone: '',
@@ -526,6 +560,9 @@ export class QuotationEdit implements OnInit {
       quantity: quotation.quantity,
       total: quotation.total,
       initialPayment: quotation.initialPayment,
+      installments: quotation.installments || 12,
+      monthlyPayment: quotation.monthlyPayment || 0,
+      validUntilTime: quotation.validUntilTime || '',
       advisorName: quotation.advisorName,
       advisorDocument: quotation.advisorDocument,
       advisorPhone: quotation.advisorPhone,
@@ -556,6 +593,11 @@ export class QuotationEdit implements OnInit {
 
   recalculate() {
     this.form.total = this.quotationService.calculateTotal(this.form);
+    if (this.paymentType() === 'credito' && this.form.installments > 0 && this.form.total > 0) {
+      this.form.monthlyPayment = Math.round(this.form.total / this.form.installments);
+    } else {
+      this.form.monthlyPayment = 0;
+    }
   }
 
   saveQuotation() {
@@ -593,6 +635,9 @@ export class QuotationEdit implements OnInit {
       quantity: Number(this.form.quantity),
       total: Number(this.form.total),
       initialPayment: Number(this.form.initialPayment),
+      installments: Number(this.form.installments),
+      monthlyPayment: Number(this.form.monthlyPayment),
+      validUntilTime: this.form.validUntilTime,
       advisorName: this.form.advisorName,
       advisorDocument: this.form.advisorDocument,
       advisorPhone: this.form.advisorPhone,
