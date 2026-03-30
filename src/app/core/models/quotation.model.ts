@@ -35,6 +35,9 @@ export interface Quotation {
   quantity: number;
   total: number;
   initialPayment: number;
+  installments: number;
+  monthlyPayment: number;
+  validUntilTime: string;
   advisorName: string;
   advisorDocument: string;
   advisorPhone: string;
