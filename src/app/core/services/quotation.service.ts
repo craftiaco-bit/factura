@@ -74,7 +74,7 @@ export class QuotationService {
       (q.registrationValue ?? 0) +
       (q.insuranceValue ?? 0)
     ) * (q.quantity ?? 1);
-    return subtotal - (q.initialPayment ?? 0);
+    return subtotal - (q.initialPayment ?? 0) - (q.immediateDeposit ?? 0);
   }
 
   private readLocal(): Quotation[] {

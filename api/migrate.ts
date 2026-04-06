@@ -81,6 +81,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       registration_value NUMERIC DEFAULT 0,
       insurance_value NUMERIC DEFAULT 0,
       quantity INTEGER DEFAULT 1,
+      immediate_deposit NUMERIC DEFAULT 0,
       total NUMERIC DEFAULT 0,
       initial_payment NUMERIC DEFAULT 0,
       advisor_name TEXT DEFAULT '',
@@ -101,6 +102,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS helmet_included BOOLEAN DEFAULT false`,
     `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS accessories_included BOOLEAN DEFAULT false`,
     `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS initial_payment NUMERIC DEFAULT 0`,
+    `ALTER TABLE quotations ADD COLUMN IF NOT EXISTS immediate_deposit NUMERIC DEFAULT 0`,
   ];
   for (const q of alterQueries) {
     await sql(q);

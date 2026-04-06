@@ -25,6 +25,7 @@ interface QuotationFormData {
   registrationValue: number;
   insuranceValue: number;
   quantity: number;
+  immediateDeposit: number;
   total: number;
   initialPayment: number;
   installments: number;
@@ -311,6 +312,19 @@ interface QuotationFormData {
                   (ngModelChange)="form.quantity = $event; recalculate()"
                 />
               </div>
+              @if (paymentType() === 'contado') {
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">Separado inmediato de la unidad</label>
+                  <input
+                    type="number"
+                    min="0"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                    placeholder="Valor abonado al separar la unidad"
+                    [ngModel]="form.immediateDeposit"
+                    (ngModelChange)="form.immediateDeposit = $event; recalculate()"
+                  />
+                </div>
+              }
               @if (paymentType() === 'credito') {
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-1">Cuota Inicial</label>
@@ -477,6 +491,7 @@ export class QuotationForm {
       registrationValue: 440000,
       insuranceValue: 0,
       quantity: 1,
+      immediateDeposit: 0,
       total: 783300,
       initialPayment: 0,
       installments: 12,
@@ -552,6 +567,7 @@ export class QuotationForm {
       registrationValue: Number(this.form.registrationValue),
       insuranceValue: Number(this.form.insuranceValue),
       quantity: Number(this.form.quantity),
+      immediateDeposit: Number(this.form.immediateDeposit),
       total: Number(this.form.total),
       initialPayment: Number(this.form.initialPayment),
       installments: Number(this.form.installments),

@@ -193,8 +193,14 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
                 <td class="price-value">{{ data().initialPayment | currencyCop }}</td>
               </tr>
             }
+            @if (data().paymentType === 'contado' && data().immediateDeposit) {
+              <tr class="deposit-row">
+                <td class="price-label">Separado inmediato:</td>
+                <td class="price-value deposit-value">- {{ data().immediateDeposit | currencyCop }}</td>
+              </tr>
+            }
             <tr class="total-row">
-              <td class="price-label">{{ data().paymentType === 'credito' && data().initialPayment ? 'Saldo a financiar:' : 'Total a pagar:' }}</td>
+              <td class="price-label">{{ data().paymentType === 'credito' && data().initialPayment ? 'Saldo a financiar:' : (data().paymentType === 'contado' && data().immediateDeposit ? 'Saldo a pagar:' : 'Total a pagar:') }}</td>
               <td class="price-value total-value">{{ data().total | currencyCop }}</td>
             </tr>
             @if (data().paymentType === 'credito' && data().installments) {
@@ -657,6 +663,9 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
     .monthly-row { border-top: 2px solid var(--accent); border-bottom: none !important; background: #fef2f2; }
     .monthly-row .price-label { font-size: 11px; font-weight: 800; padding-top: 6px; padding-bottom: 6px; }
     .monthly-value { font-weight: 800 !important; font-size: 12px !important; color: var(--accent); padding-top: 6px !important; padding-bottom: 6px !important; }
+    .deposit-row { background: #fffbeb; border-bottom: 1px dashed #d97706 !important; }
+    .deposit-row .price-label { color: #92400e; font-weight: 700; }
+    .deposit-value { color: #b45309 !important; font-weight: 700 !important; font-style: italic; }
 
     /* ========== DISCLAIMERS ========== */
     .disclaimers { padding: 8px 24px; text-align: center; font-size: 9px; color: #666; line-height: 1.5; }

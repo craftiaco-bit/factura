@@ -33,6 +33,7 @@ export interface Quotation {
   registrationValue: number;
   insuranceValue: number;
   quantity: number;
+  immediateDeposit: number;
   total: number;
   initialPayment: number;
   installments: number;

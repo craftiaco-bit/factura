@@ -27,6 +27,7 @@ interface QuotationFormData {
   registrationValue: number;
   insuranceValue: number;
   quantity: number;
+  immediateDeposit: number;
   total: number;
   initialPayment: number;
   installments: number;
@@ -328,27 +329,40 @@ interface QuotationFormData {
                     (ngModelChange)="form.quantity = $event; recalculate()"
                   />
                 </div>
-                @if (paymentType() === 'credito') {
-                  <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Cuota Inicial</label>
-                    <input
-                      type="number"
-                      class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
-                      [ngModel]="form.initialPayment"
-                      (ngModelChange)="form.initialPayment = $event; recalculate()"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">No. de Cuotas</label>
-                    <input
-                      type="number"
-                      min="1"
-                      class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
-                      [ngModel]="form.installments"
-                      (ngModelChange)="form.installments = $event; recalculate()"
-                    />
-                  </div>
-                }
+              @if (paymentType() === 'contado') {
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">Separado inmediato de la unidad</label>
+                  <input
+                    type="number"
+                    min="0"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                    placeholder="Valor abonado al separar la unidad"
+                    [ngModel]="form.immediateDeposit"
+                    (ngModelChange)="form.immediateDeposit = $event; recalculate()"
+                  />
+                </div>
+              }
+              @if (paymentType() === 'credito') {
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">Cuota Inicial</label>
+                  <input
+                    type="number"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                    [ngModel]="form.initialPayment"
+                    (ngModelChange)="form.initialPayment = $event; recalculate()"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">No. de Cuotas</label>
+                  <input
+                    type="number"
+                    min="1"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                    [ngModel]="form.installments"
+                    (ngModelChange)="form.installments = $event; recalculate()"
+                  />
+                </div>
+              }
                 <div class="flex items-end">
                   <div class="w-full bg-gray-50 border-2 border-[#D5150D] rounded-lg px-4 py-2">
                     <span class="text-sm text-gray-500">Total a pagar:</span>
@@ -503,6 +517,7 @@ export class QuotationEdit implements OnInit {
     registrationValue: 0,
     insuranceValue: 0,
     quantity: 1,
+    immediateDeposit: 0,
     total: 0,
     initialPayment: 0,
     installments: 12,
@@ -558,6 +573,7 @@ export class QuotationEdit implements OnInit {
       registrationValue: quotation.registrationValue,
       insuranceValue: quotation.insuranceValue,
       quantity: quotation.quantity,
+      immediateDeposit: quotation.immediateDeposit ?? 0,
       total: quotation.total,
       initialPayment: quotation.initialPayment,
       installments: quotation.installments || 12,
@@ -633,6 +649,7 @@ export class QuotationEdit implements OnInit {
       registrationValue: Number(this.form.registrationValue),
       insuranceValue: Number(this.form.insuranceValue),
       quantity: Number(this.form.quantity),
+      immediateDeposit: Number(this.form.immediateDeposit),
       total: Number(this.form.total),
       initialPayment: Number(this.form.initialPayment),
       installments: Number(this.form.installments),
