@@ -26,6 +26,7 @@ interface QuotationFormData {
   insuranceValue: number;
   quantity: number;
   total: number;
+  separado: number;
   initialPayment: number;
   installments: number;
   monthlyPayment: number;
@@ -311,6 +312,18 @@ interface QuotationFormData {
                   (ngModelChange)="form.quantity = $event; recalculate()"
                 />
               </div>
+              @if (paymentType() === 'contado') {
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">Valor de Separado (mínimo)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-[#D5150D]"
+                    [ngModel]="form.separado"
+                    (ngModelChange)="form.separado = $event"
+                  />
+                </div>
+              }
               @if (paymentType() === 'credito') {
                 <div>
                   <label class="block text-sm font-semibold text-gray-700 mb-1">Cuota Inicial</label>
@@ -478,6 +491,7 @@ export class QuotationForm {
       insuranceValue: 0,
       quantity: 1,
       total: 783300,
+      separado: 0,
       initialPayment: 0,
       installments: 12,
       monthlyPayment: 0,
@@ -553,6 +567,7 @@ export class QuotationForm {
       insuranceValue: Number(this.form.insuranceValue),
       quantity: Number(this.form.quantity),
       total: Number(this.form.total),
+      separado: Number(this.form.separado),
       initialPayment: Number(this.form.initialPayment),
       installments: Number(this.form.installments),
       monthlyPayment: Number(this.form.monthlyPayment),

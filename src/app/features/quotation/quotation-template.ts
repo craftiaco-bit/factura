@@ -197,6 +197,16 @@ import { CurrencyCopPipe } from '../../shared/pipes/currency-cop.pipe';
               <td class="price-label">{{ data().paymentType === 'credito' && data().initialPayment ? 'Saldo a financiar:' : 'Total a pagar:' }}</td>
               <td class="price-value total-value">{{ data().total | currencyCop }}</td>
             </tr>
+            @if (data().paymentType === 'contado' && data().separado > 0) {
+              <tr>
+                <td class="price-label">Valor de separado:</td>
+                <td class="price-value">{{ data().separado | currencyCop }}</td>
+              </tr>
+              <tr class="monthly-row">
+                <td class="price-label">Saldo restante:</td>
+                <td class="price-value monthly-value">{{ data().total - data().separado | currencyCop }}</td>
+              </tr>
+            }
             @if (data().paymentType === 'credito' && data().installments) {
               <tr>
                 <td class="price-label">No. de cuotas:</td>

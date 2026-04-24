@@ -34,6 +34,7 @@ export interface Quotation {
   insuranceValue: number;
   quantity: number;
   total: number;
+  separado: number;
   initialPayment: number;
   installments: number;
   monthlyPayment: number;
